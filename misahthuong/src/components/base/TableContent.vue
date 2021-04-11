@@ -70,7 +70,21 @@
           
         </div>
         <div class="page-bar">
-
+          <button class="pre-pre"></button>
+          <button class="pre"></button>
+          <span>Trang</span>
+          <input type="text" :v-model="1">
+          <span>trên 1</span>
+          <button class="ne"></button>
+          <button class="ne-ne"></button>
+          <button class="reload"></button>
+          <select name="" id="">
+            <option value="15">15</option>
+            <option value="25">25</option>
+            <option value="50" selected>50</option>
+            <option value="100">100</option>
+          </select>
+          <span class="text-right">Hiển thị 1-6 trên 6 kết quả</span>
         </div>
     </div>
 </template>
@@ -168,8 +182,83 @@ table{
   padding: 4px  ;
 }
 .page-bar{
-  width: 100%;
-  height: 52px;
+  width: calc(100% - 16px);
+  height: 36px;
+  font-size: 12px;
+  color: #757575;
+  padding: 8px;
+}
+.page-bar button{
+  width: 26px;
+  height: 26px;
+  background-color: #ffffff;
+  outline: none;
+  border: 1px solid #c3ecff;
+  border-radius: 4px;
+  vertical-align: middle;
+  margin-right: 4px;
+  cursor: pointer;
+}
+.page-bar input{
+  height: 24px;
+  width: 48px;
+  background-color: #ffffff;
+  outline: none;
+  border: 1px solid #c3ecff;
+  border-radius: 4px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+.page-bar select{
+  height: 26px;
+  width: auto;
+  background-color: #ffffff;
+  outline: none;
+  border: 1px solid #c3ecff;
+  border-radius: 4px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+.page-bar .text-right{
+  position: absolute;
+  right: 8px;
+  bottom: 28px;
+}
+.page-bar span{
+  padding-right: 4px;
+}
+.pre-pre{
+  text-align: center;
+  background-repeat: no-repeat;
+  background-image: url("../../assets/common-icon.png");
+  background-position: -648px -123px;
+}
+.pre{
+  text-align: center;
+  background-repeat: no-repeat;
+  background-image: url("../../assets/common-icon.png");
+  background-position: -699px -123px;
+}
+.ne-ne{
+  background-color: #212121;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-image: url("../../assets/common-icon.png");
+  background-position: -798px -123px;
+}
+.ne{
+  background-color: #212121;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-image: url("../../assets/common-icon.png");
+  background-position: -748px -123px;
+}
+.reload{
+  background-color: #212121;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-image: url("../../assets/common-icon.png");
+  background-position: -849px -124px;
 }
 .w-1{
   min-width: 150px;
