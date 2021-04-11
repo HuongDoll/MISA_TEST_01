@@ -4,32 +4,34 @@
             <img src="../../assets/Logo_Full_White.png" >
         </div>
         <div class="option">
-            <span><img src="../../assets/icon/dashboard.png" alt=""></span>
-            <span>Tổng quan</span>
+            <span class="img overview"></span>
+            <span class="lable">Tổng quan</span>
         </div>
         <div class="option">
-            <span><img src="../../assets/icon/dashboard.png" alt=""></span>
-            <span>Báo cáo</span>
+            <span class="report">
+                <img src="../../assets/icon/car.png" alt="">
+            </span>
+            <span class="lable">Báo cáo</span>
         </div>
         <div class="option">
-            <span><img src="../../assets/icon/dashboard.png" alt=""></span>
-            <span>Đơn hàng</span>
+            <span class="img order"></span>
+            <span class="lable">Đơn hàng</span>
         </div>
         <div class="option">
-            <span><img src="../../assets/icon/dashboard.png" alt=""></span>
-            <span>Mua hàng</span>
+            <span class="img purchase"></span>
+            <span class="lable">Mua hàng</span>
         </div>
         <div class="option">
-            <span><img src="../../assets/icon/dashboard.png" alt=""></span>
-            <span>Khuyến mại</span>
+            <span class="img promotion"></span>
+            <span class="lable">Khuyến mại</span>
         </div>
         <div class="option active">
-            <span><img src="../../assets/icon/dashboard.png" alt=""></span>
-            <span>Quản lý cửa hàng</span>
+            <span class="img manage"></span>
+            <span class="lable">Quản lý cửa hàng</span>
         </div>
         <div class="option">
-            <span><img src="../../assets/icon/dashboard.png" alt=""></span>
-            <span>Hàng hóa</span>
+            <span class="img goods"></span>
+            <span class="lable">Hàng hóa</span>
         </div>
     </div>
 </template>
@@ -54,7 +56,7 @@ export default {
     height: 100vh;
 }
 .logo{
-    height: 48px;
+    height: 52px;
     width: 100%;
     padding-left: 0px;
     padding-top: 0px;
@@ -62,23 +64,60 @@ export default {
     cursor: pointer;
 }
 .logo img {
-    height: 48px;
+    height: 52px;
     width: auto;
 }
 .option{
     padding-top: 12px;
-    height: 32px;
+    height: 28px;
     font-size: 13px;
     padding-left: 12px;
     color: #ffffff;
-    background-color: #026b97
+    background-color: #026b97;
+    border-bottom: 4px solid #026b97;
 }
-.option img {
+.img {
+    background-image: url("../../assets/slibarmenu.png");
+    position: fixed;
+    width: 100%;
+    height: 44px;
+    left: 8px;
+    width: 22px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: 0 6px;
+}
+.lable{
+    padding-left: 26px;
+}
+.overview{
+    background-position: 0 10px;
+    top: 48px;
+}
+.report img{
+    position: absolute;
     width: 20px;
     height: 20px;
-    align-items: center;
-    vertical-align: middle;
-    margin-right: 8px;
+}
+.order{
+    background-position: 0 10px;
+    top: 136px;
+}
+.purchase{
+    background-position: 0 -32px;
+    top: 180px;
+}
+.promotion{
+    background-position: 0 -190px;
+    top: 224px;
+}
+.manage{
+    background-position: 0 -228px;
+    top: 268px;
+}
+.goods{
+    background-position: 0 -346px;
+    top: 312px;
 }
 .option span{
     vertical-align: middle;
