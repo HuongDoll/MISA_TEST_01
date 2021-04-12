@@ -188,6 +188,7 @@ tr::before {background-color: #e2e4f1;}
   width: 100%;
   border: 1px solid #d0d0d0 ;
   outline: none;
+  padding: 0 8px;
 }
 .group-input input:focus{
   border: 1px solid #636dde;

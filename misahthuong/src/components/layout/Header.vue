@@ -150,11 +150,11 @@ button{
 }
 /*css Cài đặt tài khoản */
 .acount-setting{
-    width: 180px;
+    width: 190px;
     background-color: #ffffff;
     position: absolute;
     top: 50px;
-    right: 170px;
+    right: 158px;
     font-size: 13px;
     border: 1px solid #c3c3c3;
     border-radius: 4px;
@@ -175,7 +175,7 @@ button{
 }
 .setting{
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: calc(100% - 150px);
+    height: 100vh;
 }
 </style>

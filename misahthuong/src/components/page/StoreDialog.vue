@@ -7,95 +7,104 @@
                 <button type="button" @click="closeDialog"></button>
             </div>
             <div class="main-content">
+                <span tabindex="1" @focus="tabIndexLast()"></span>
                 <div class="groupdb w-full">
                     <span class="lable">Mã cửa hàng <span class="text-red">*</span> </span>
-                    <input class="input" type="text" name="" id="">
+                    <input class="input" type="text" name="" id="" tabindex="2" ref="storeCode">
                 </div>
                 <div class="groupdb w-full">
                     <span class="lable">Tên cửa hàng <span class="text-red">*</span> </span>
-                    <input class="input" type="text" name="" id="">
+                    <input class="input" type="text" name="" id="" tabindex="3">
                 </div>
                 <div class="groupdb w-full">
                     <span class="lable">Địa chỉ <span class="text-red">*</span> </span>
-                    <textarea name="" id="" rows="5"></textarea>
+                    <textarea name="" id="" rows="5" tabindex="4"></textarea>
                 </div>
                 <div class="groupdb w-full">
                     <div class="group-l w-haf">
                         <span class="lable">Số điện thoại</span>
-                        <input class="input" type="text" name="" id="">
+                        <input class="input" type="text" name="" id="" tabindex="5">
                     </div>
                     <div class="group-r w-haf">
                         <span class="lable">Mã số thuế</span>
-                        <input class="input" type="text" name="" id="">
+                        <input class="input" type="text" name="" id="" tabindex="6">
                     </div>
                 </div>
                 <div class="groupdb w-full">
                     <div class="group group-l w-haf">
                         <span class="lable">Quốc gia</span>
-                        <select name="" id=""></select>
+                        <select name="" id="" tabindex="7"></select>
                     </div>
                     
                 </div>
                 <div class="groupdb w-full">
                     <div class="group-l w-haf">
                         <span class="lable">Tỉnh/Thành phố</span>
-                        <select name="" id=""></select>
+                        <select name="" id="" tabindex="8"></select>
                     </div>
                     <div class="group-r w-haf">
                         <span class="lable">Quận huyện</span>
-                        <select name="" id=""></select>
+                        <select name="" id="" tabindex="9"></select>
                     </div>
                 </div>
                 <div class="groupdb w-full">
                     <div class="group-l w-haf">
                         <span class="lable">Phường/Xã</span>
-                        <select name="" id=""></select>
+                        <select name="" id="" tabindex="10"></select>
                     </div>
                     <div class="group-r w-haf">
                         <span class="lable">Đường phố</span>
-                        <input type="text" name="" id="">
+                        <input type="text" name="" id="" tabindex="11" ref="storeAddress">
                     </div>
                 </div>
+                
             </div>
             <div class="footer">
-                <div class="help">
+                <div class="help" tabindex="12">
                     <span class="help-icon"><img src="../../assets/icon/icon_help_18.png" ></span>
                     <span >Trợ giúp</span>
                 </div>
                 <div class="group-button">
-                    <button class="button-save">
+                    <button class="button-save" tabindex="13">
                         <span class="img"></span>
                         <span class="label">Lưu</span>
                     </button>
-                    <button class="button-add">
+                    <button class="button-add" tabindex="14">
                         <span class="img"></span>
                         <span class="label">Lưu và thêm mới</span>
                     </button>
-                    <button class="button-cancel">
+                    <button class="button-cancel" tabindex="15">
                         <span class="img"></span>
                         <span class="label">Hủy bỏ</span>
                     </button>
                 </div>
             </div>
+            <span tabindex="16" @focus="tabIndexFirst()"></span>
         </div>
     </div>
 </template>
 <script>
 
 export default {
-  name: 'StoreDialog',
-  props: {
-  },
-  data(){
+    name: 'StoreDialog',
+    props: {
+    },
+    data(){
     return{
-      
+        
     }
-  },
-  methods:{
-      closeDialog(){
-          this.$emit('closeDialog');
-      }
-  }
+    },
+    methods:{
+        closeDialog(){
+            this.$emit('closeDialog');
+        },
+        tabIndexFirst(){
+            this.$refs.storeCode.focus();
+        },
+        tabIndexLast(){
+            this.$refs.storeAddress.focus();
+        }
+    }
 }
 </script>
 <style scoped>
@@ -252,11 +261,12 @@ input:focus{
     padding: 8px 16px 8px 32px;
     cursor: pointer;
     border-radius: 4px;
+    outline: none;
 }
 .help:hover{
     background-color: #e5e6eb;
 }
-.help:active{
+.help:focus{
     border: 1px solid #2b3173;
 }
 .help-icon img{
@@ -286,6 +296,9 @@ input:focus{
 .button-cancel:hover{
     border: 1px solid #2b3173;
 }
+.button-cancel:focus{
+    border: 1px solid #2b3173;
+}
 .button-cancel .img{
     right: 60px;
     background-image: url("../../assets/common-icon.png");
@@ -305,6 +318,9 @@ input:focus{
 .button-add:hover{
     color: #6b6f9d ;
 }
+.button-add:focus{
+    color: #6b6f9d ;
+}
 .button-add .img{
     right: 214px;
     background-image: url("../../assets/common-icon.png");
@@ -322,6 +338,9 @@ input:focus{
     outline: none;
 }
 .button-save:hover{
+    background-color: #6b6f9d;
+}
+.button-save:focus{
     background-color: #6b6f9d;
 }
 .button-save .img{

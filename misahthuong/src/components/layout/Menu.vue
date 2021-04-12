@@ -111,11 +111,11 @@ export default {
 }
 .manage{
     background-position: 0 -228px;
-    top: 272px;
+    top: 270px;
 }
 .goods{
     background-position: 0 -346px;
-    top: 316px;
+    top: 314px;
 }
 .option span{
     vertical-align: middle;
