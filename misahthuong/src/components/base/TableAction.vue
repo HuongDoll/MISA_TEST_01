@@ -1,10 +1,10 @@
 <template>
     <div class="table-action">
-        <button class="group">
+        <button class="group group-add" @click="openDialog()">
           <span class="img add"></span>
           <span class="lable">Thêm mới</span>
         </button>
-        <button  class="group">
+        <button  class="group notouch">
           <span class="img double"></span>
           <span class="lable">Nhân bản</span>
         </button>
@@ -33,26 +33,35 @@ export default {
     }
   },
   methods:{
+    openDialog(){
+      this.$emit("openDialog");
+    }
   }
 }
 </script>
 <style scoped>
+.notouch{
+  cursor: not-allowed;
+}
 .table-action{
     width: calc(100% - 16px);
     height: 36px;
-    background-color: #026b97;
+    background-color: #2b3173 ;
     margin-left: 8px;
     display: flex;
 }
 .group{
-  background-color: #026b97;
+  background-color: #2b3173 ;
   padding: none;
   border: none;
-  border-left: 1px solid #00577b;
+  border-left: 1px solid #190472 ;
   outline: none;
 }
+.group-add{
+  border-left: none ;
+}
 .group:hover{
-  background-color: #0088c1;
+  background-color: #6b6f9d;
 }
 .lable{
   color: #ffffff;

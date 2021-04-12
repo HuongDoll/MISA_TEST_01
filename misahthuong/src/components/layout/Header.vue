@@ -7,14 +7,30 @@
                 <option value="" > D00AVI - 138 Tô Hiệu Hà Đông</option>
                 <option value="" > D00AVI - 182 Nguyễn Huy Tưởng</option>
             </select>
-            <div class="acount">
+            <div class="acount" @click="ShowAcount">
                 <img src="../../assets/icon/Image.jpg" >
-                <span>qtht misa</span>
+                <span>Hoàng Thị Thu Hương</span>
                 <img src="../../assets/icon/chevron-down-solid.svg" class="img-down">
             </div>
+            
             <button class="button-new"><img src="../../assets/icon/misasupport_1.png" class="img-new"></button>
-            <button><img src="../../assets/icon/bell.png" ></button>
-            <button><img src="../../assets/icon/question.png" ></button>
+            <button class="notify"> <img></button>
+            <button class="help"><img></button>
+        </div>
+        <div v-show="isShowAcount" class="setting" @click="ShowAcount"></div>
+        <div v-show="isShowAcount" class="acount-setting">
+            <div  @click="ShowAcount">
+                <img class="icon" src="../../assets/icon/icon-change-password16.png">
+                <span class="label-setting">Thay đổi mật khẩu</span>
+            </div>
+            <div  @click="ShowAcount">
+                <img class="icon" src="../../assets/icon/icon-feedback.png">
+                <span class="label-setting">Góp ý với nhà phát triển</span>
+            </div>
+            <div @click="ShowAcount">
+                <img class="icon" src="../../assets/icon/icon-logout16.png">
+                <span class="label-setting">Đăng xuất</span>
+            </div>
         </div>
     </div>
 </template>
@@ -25,10 +41,13 @@ export default {
   },
   data(){
     return{
-      items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+      isShowAcount: false,
     }
   },
   methods:{
+      ShowAcount(){
+          this.isShowAcount = !this.isShowAcount;
+      }
   }
 }
 </script>
@@ -47,11 +66,12 @@ export default {
     right: 0px;
 }
 .group select{
+    height: 32px;
     margin: 12px;
     font-size: 12px;
     outline: none;
     cursor: pointer;
-    border: 1px solid #0088c1;
+    border: 1px solid #c3c3c3;
     border-radius: 4px;
 }
 .group button {
@@ -59,27 +79,28 @@ export default {
     background-color: #ffffff;
     outline: none;
     border: none;
-    border-left: 1px solid #c3ecff;
+    border-left: 1px solid #c3c3c3;
     padding: 0px;
 }
-.group button:hover{
-    background-color: #d1f1ff ;
-}
+
 .name{
     padding-left: 20px;
     padding-top: 14px;
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 18px;
+    font-weight: 700;
     color: #212121;
 }
 .acount{
-    font-size: 12px;
-    padding: 12px ;
+    font-size: 13px;
+    padding: 14px ;
     padding-top: 14px;
+    color: #212121;
+    font-weight: 700;
+    cursor: pointer;
 }
 .acount img{
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
     padding-right: 4px;
     vertical-align: middle;
 }
@@ -90,7 +111,7 @@ export default {
 .acount .img-down{
     width: 10px;
     height: 10px;
-    padding-left: 4px;
+    padding-left: 8px;
     vertical-align: middle;
     cursor: pointer;
 }
@@ -103,9 +124,58 @@ button img{
     width: 52px;
     height: 52px;
     padding: 0px;
-    background-color: #026b97;
+    background-color: #2b3173 ;
+}
+.img-new:hover{
+    background-color: #2b3173 ;
 }
 button{
     cursor: pointer;
+}
+.notify img{
+    width: 18px;
+    height: 18px;
+    content: url("../../assets/icon/notify-18.png");
+}
+.notify:hover img{
+    content: url("../../assets/icon/notify-hover-18.png");
+}
+.help img{
+    width: 18px;
+    height: 18px;
+    content: url("../../assets/icon/icon_help_18.png");
+}
+.help:hover img{
+    content: url("../../assets/icon/icon-help-18-hover.png");
+}
+/*css Cài đặt tài khoản */
+.acount-setting{
+    width: 180px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 50px;
+    right: 170px;
+    font-size: 13px;
+    border: 1px solid #c3c3c3;
+    border-radius: 4px;
+    box-shadow: 1px 1px 4px #000000;
+}
+.acount-setting div{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px;
+    border-bottom: 1px solid #c3c3c3;
+}
+.acount-setting div:hover{
+    color: #636dde;
+}
+.icon{
+    padding-right: 8px;
+    vertical-align: middle;
+}
+.setting{
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 </style>

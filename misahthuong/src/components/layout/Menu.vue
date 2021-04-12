@@ -8,14 +8,13 @@
             <span class="lable">Tổng quan</span>
         </div>
         <div class="option">
-            <span class="report">
-                <img src="../../assets/icon/car.png" alt="">
+            <span class="img report">
             </span>
             <span class="lable">Báo cáo</span>
         </div>
         <div class="option">
-            <span class="img order"></span>
-            <span class="lable">Đơn hàng</span>
+            <span class="order"><img src="../../assets/icon/ic_sogiaohang.png" ></span>
+            <span class="lable-order">Đơn hàng</span>
         </div>
         <div class="option">
             <span class="img purchase"></span>
@@ -51,7 +50,7 @@ export default {
 </script>
 <style scoped>
 .menu{
-    background-color: #026b97;
+    background-color: #2b3173;
     width: 150px;
     height: 100vh;
 }
@@ -72,9 +71,9 @@ export default {
     height: 28px;
     font-size: 13px;
     padding-left: 12px;
-    color: #ffffff;
-    background-color: #026b97;
-    border-bottom: 4px solid #026b97;
+    color: #aaacc7 ;
+    background-color: #2b3173 ;
+    border-bottom: 4px solid #2b3173 ;
 }
 .img {
     background-image: url("../../assets/slibarmenu.png");
@@ -90,43 +89,42 @@ export default {
 .lable{
     padding-left: 26px;
 }
+.lable-order{
+    padding-left: 8px;
+}
 .overview{
     background-position: 0 10px;
-    top: 48px;
+    top: 52px;
 }
-.report img{
-    position: absolute;
-    width: 20px;
-    height: 20px;
+.report{
+    background-position: 0 -270px;
+    top: 96px;
 }
-.order{
-    background-position: 0 10px;
-    top: 136px;
-}
+
 .purchase{
     background-position: 0 -32px;
-    top: 180px;
+    top: 184px;
 }
 .promotion{
     background-position: 0 -190px;
-    top: 224px;
+    top: 228px;
 }
 .manage{
     background-position: 0 -228px;
-    top: 268px;
+    top: 272px;
 }
 .goods{
     background-position: 0 -346px;
-    top: 312px;
+    top: 316px;
 }
 .option span{
     vertical-align: middle;
 }
 .option:hover{
-    background-color: #0088c1;
+    background-color: #1e235a;
     cursor: pointer;
 }
 .active{
-    background-color: #00577b;
+    background-color: #1e235a;
 }
 </style>

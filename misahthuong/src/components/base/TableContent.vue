@@ -66,6 +66,27 @@
               <td class="w-1">024 36622666</td>
               <td class="w-1">Đang hoạt động</td>
             </tr>
+            <tr class="row">
+              <td class="w-1">138TH</td>
+              <td class="w-2">DODAVI - 318 TÔ HIỆU, HÀ ĐÔNG</td>
+              <td class="w-3">318 TÔ HIỆU, HÀ ĐÔNG</td>
+              <td class="w-1">024 36622666</td>
+              <td class="w-1">Đang hoạt động</td>
+            </tr>
+            <tr class="row">
+              <td class="w-1">138TH</td>
+              <td class="w-2">DODAVI - 318 TÔ HIỆU, HÀ ĐÔNG</td>
+              <td class="w-3">318 TÔ HIỆU, HÀ ĐÔNG</td>
+              <td class="w-1">024 36622666</td>
+              <td class="w-1">Đang hoạt động</td>
+            </tr>
+            <tr class="row">
+              <td class="w-1">138TH</td>
+              <td class="w-2">DODAVI - 318 TÔ HIỆU, HÀ ĐÔNG</td>
+              <td class="w-3">318 TÔ HIỆU, HÀ ĐÔNG</td>
+              <td class="w-1">024 36622666</td>
+              <td class="w-1">Đang hoạt động</td>
+            </tr>
           </table>
           
         </div>
@@ -73,7 +94,7 @@
           <button class="pre-pre"></button>
           <button class="pre"></button>
           <span>Trang</span>
-          <input type="text" :v-model="1">
+          <input type="text" v-model="pageNumber">
           <span>trên 1</span>
           <button class="ne"></button>
           <button class="ne-ne"></button>
@@ -95,7 +116,7 @@ export default {
   },
   data(){
     return{
-      
+      pageNumber : 1,
     }
   },
   methods:{
@@ -103,6 +124,7 @@ export default {
 }
 </script>
 <style scoped>
+
 .table-content{
     width: calc(100% - 16px);
     height: calc(100vh - 104px);
@@ -112,54 +134,63 @@ export default {
 .table{
   width: 100%;
   height: calc(100vh - 156px);
-  border-bottom: 4px solid #d1f1ff;
-  font-size: 12px;
+  border-bottom: 4px solid #d0d0d0 ;
+  font-size: 13px;
   overflow-x: scroll;
 }
 .heading{
   height: 32px;
   display: flex;
   color: #212121;
+  background-color: #f0f0f0;
 }
 .heading span{
-  font-weight: bold;
-  border-right: 1px solid #d1f1ff;
-  border-bottom: 1px solid #d1f1ff;
+  text-align: center;
+  font-weight: 700;
+  border-right: 1px solid #d0d0d0 ;
+  border-bottom: 1px solid #d0d0d0 ;
   padding: 8px;
 }
 table{
   border-spacing: 0px;
   width: 100%;
 }
+/* css cho table */
+tr:nth-child(even){background-color: #f6f6f6;}
+
+tr:hover {background-color: #eaeff4;}
+
+tr::before {background-color: #e2e4f1;}
+
 .row{
   height: 32px;
   width: 100%;
   display: flex;
 }
 .row td{
-  color: #757575;
-  border-right: 1px solid #d1f1ff;
-  border-bottom: 1px solid #d1f1ff;
+  color: #404040;
+  border-right: 1px solid #d0d0d0 ;
+  border-bottom: 1px solid #d0d0d0 ;
   padding: 8px;
   font-size: 12px;
 }
 .group{
-  height: 32px;
+  height: 33px;
   display: flex;
 }
 .group .group-input{
-  border-right: 1px solid #d1f1ff;
-  border-bottom: 1px solid #d1f1ff;
+  border-right: 1px solid #d0d0d0 ;
+  border-bottom: 1px solid #d0d0d0 ;
   display: flex;
   padding: 1px;
 }
 .group-input input{
   width: 100%;
-  border: 1px solid #d1f1ff;
+  border: 1px solid #d0d0d0 ;
   outline: none;
 }
 .group-input input:focus{
-  border: 1px solid #0088c1;
+  border: 1px solid #636dde;
 }
 
 .group .select{
@@ -169,23 +200,23 @@ table{
   text-indent: 1px;
   text-overflow: '';
   outline: none;
-  border: 1px solid #d1f1ff;
+  border: 1px solid #d0d0d0 ;
   padding-left: 10px;
-  padding-right: 10px;
+  padding-right: 11px;
   padding-top: 4px;
 }
 .status{
   font-size: 12px;
   width: 100% ;
   outline: none;
-  border: 1px solid #d1f1ff;
+  border: 1px solid #d0d0d0 ;
   padding: 4px  ;
 }
 .page-bar{
   width: calc(100% - 16px);
   height: 36px;
-  font-size: 12px;
-  color: #757575;
+  font-size: 13px;
+  color: #4b4c4c;
   padding: 8px;
 }
 .page-bar button{
@@ -193,7 +224,7 @@ table{
   height: 26px;
   background-color: #ffffff;
   outline: none;
-  border: 1px solid #c3ecff;
+  border: 1px solid #d0d0d0;
   border-radius: 4px;
   vertical-align: middle;
   margin-right: 4px;
@@ -204,17 +235,18 @@ table{
   width: 48px;
   background-color: #ffffff;
   outline: none;
-  border: 1px solid #c3ecff;
+  border: 1px solid #d0d0d0;
   border-radius: 4px;
   vertical-align: middle;
   margin-right: 4px;
+  text-align: center;
 }
 .page-bar select{
   height: 26px;
   width: auto;
   background-color: #ffffff;
   outline: none;
-  border: 1px solid #c3ecff;
+  border: 1px solid #d0d0d0;
   border-radius: 4px;
   vertical-align: middle;
   margin-right: 4px;
@@ -272,9 +304,11 @@ table{
 }
 .wi-1{
   min-width: 164px;
+  width: 164px;
 }
 .wi-2{
   min-width: 264px;
+  width: 264px;
 }
 .wi-3{
   width: 60%;

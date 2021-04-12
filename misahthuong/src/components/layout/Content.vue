@@ -27,7 +27,7 @@ export default {
 </script>
 <style scoped>
 .content{
-    background-color: #d1f1ff;
+    background-color: #e5e6eb ;
     width: calc(100% - 150px);
     height: 100vh;
 }

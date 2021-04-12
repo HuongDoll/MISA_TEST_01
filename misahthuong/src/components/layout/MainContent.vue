@@ -1,27 +1,36 @@
 <template>
     <div class="main">
-      <TableAction />
+      <TableAction @openDialog="openDialog"/>
       <TableContent />
+      <StoreDialog v-show="isShowDialog" @closeDialog="closeDialog" />
     </div>
 </template>
 <script>
 import TableAction from '../base/TableAction'
 import TableContent from '../base/TableContent'
+import StoreDialog from '../page/StoreDialog'
 
 export default {
   name: 'Content',
   components: {
     TableContent,
-    TableAction
+    TableAction,
+    StoreDialog
   },
   props: {
   },
   data(){
     return{
-      
+      isShowDialog : false,
     }
   },
   methods:{
+    closeDialog(){
+      this.isShowDialog = false;
+    },
+    openDialog(){
+      this.isShowDialog = true;
+    },
   }
 }
 </script>
