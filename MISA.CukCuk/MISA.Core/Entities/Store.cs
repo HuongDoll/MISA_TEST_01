@@ -39,19 +39,19 @@ namespace MISA.Core.Entities
         /// <summary>
         /// Khóa ngoại với bảng quốc gia
         /// </summary>
-        public Guid CountryId { get; set; }
+        public Guid? CountryId { get; set; }
         /// <summary>
         /// Khóa ngoại với bảng tỉnh/thành phố
         /// </summary>
-        public Guid ProvinceId { get; set; }
+        public Guid? ProvinceId { get; set; }
         /// <summary>
         /// Khóa ngoại với bảng quận/huyện
         /// </summary>
-        public Guid DistricId { get; set; }
+        public Guid? DistrictId { get; set; }
         /// <summary>
         /// KHóa ngoại với bảng phường/ xã
         /// </summary>
-        public Guid WardId { get; set; }
+        public Guid? WardId { get; set; }
         /// <summary>
         /// Đường phố
         /// </summary>

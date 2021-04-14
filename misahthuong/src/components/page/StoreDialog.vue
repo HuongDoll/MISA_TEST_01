@@ -10,51 +10,51 @@
                 <span tabindex="1" @focus="tabIndexLast()"></span>
                 <div class="groupdb w-full">
                     <span class="lable">Mã cửa hàng <span class="text-red">*</span> </span>
-                    <input class="input" type="text" name="" id="" tabindex="2" ref="storeCode">
+                    <input v-model="store.storeCode" class="input" type="text" name="" id="" tabindex="2" ref="storeCode">
                 </div>
                 <div class="groupdb w-full">
                     <span class="lable">Tên cửa hàng <span class="text-red">*</span> </span>
-                    <input class="input" type="text" name="" id="" tabindex="3">
+                    <input v-model="store.storeName" class="input" type="text" name="" id="" tabindex="3">
                 </div>
                 <div class="groupdb w-full">
                     <span class="lable">Địa chỉ <span class="text-red">*</span> </span>
-                    <textarea name="" id="" rows="5" tabindex="4"></textarea>
+                    <textarea v-model="store.address"  name="" id="" rows="5" tabindex="4"></textarea>
                 </div>
                 <div class="groupdb w-full">
                     <div class="group-l w-haf">
                         <span class="lable">Số điện thoại</span>
-                        <input class="input" type="text" name="" id="" tabindex="5">
+                        <input v-model="store.phoneNumber"  class="input" type="text" name="" id="" tabindex="5">
                     </div>
                     <div class="group-r w-haf">
                         <span class="lable">Mã số thuế</span>
-                        <input class="input" type="text" name="" id="" tabindex="6">
+                        <input v-model="store.storeTaxCode"  class="input" type="text" name="" id="" tabindex="6">
                     </div>
                 </div>
                 <div class="groupdb w-full">
                     <div class="group group-l w-haf">
                         <span class="lable">Quốc gia</span>
-                        <select name="" id="" tabindex="7"></select>
+                        <select v-model="store.countryId"  name="" id="" tabindex="7"></select>
                     </div>
                     
                 </div>
                 <div class="groupdb w-full">
                     <div class="group-l w-haf">
                         <span class="lable">Tỉnh/Thành phố</span>
-                        <select name="" id="" tabindex="8"></select>
+                        <select v-model="store.provinceId"  name="" id="" tabindex="8"></select>
                     </div>
                     <div class="group-r w-haf">
                         <span class="lable">Quận huyện</span>
-                        <select name="" id="" tabindex="9"></select>
+                        <select v-model="store.districtId"  name="" id="" tabindex="9"></select>
                     </div>
                 </div>
                 <div class="groupdb w-full">
                     <div class="group-l w-haf">
                         <span class="lable">Phường/Xã</span>
-                        <select name="" id="" tabindex="10"></select>
+                        <select v-model="store.wardId"  name="" id="" tabindex="10"></select>
                     </div>
                     <div class="group-r w-haf">
                         <span class="lable">Đường phố</span>
-                        <input type="text" name="" id="" tabindex="11" ref="storeAddress">
+                        <input v-model="store.street"  type="text" name="" id="" tabindex="11" ref="storeAddress">
                     </div>
                 </div>
                 
@@ -88,11 +88,71 @@
 export default {
     name: 'StoreDialog',
     props: {
+        msg: String,
+        isShowDialog: Boolean,
     },
     data(){
     return{
-        
+        store: {
+            storeId: null,
+            storeCode : null,
+            storeName: null,
+            address: null,
+            phoneNumber: null,
+            storeTaxCode: null,
+            countryId: null,
+            provinceId: null,
+            districtId: null,
+            wardId: null,
+            street: null,
+            status: 1,
+            createdDate: null,
+            createdBy: null,
+            modifiedDate: null,
+            modifiedBy: null
+        }
     }
+    },
+    watch:{
+        "isShowDialog"(){
+            console.log(this.$store.getters.getStoreById.length);
+            if(this.isShowDialog == true){
+                if(this.msg == "post"){
+                    var StoreById = this.$store.getters.getStoreById[0]
+                    this.store.storeId = StoreById.storeId;
+                    this.store.storeCode = StoreById.storeCode;
+                    this.store.storeName = StoreById.storeName;
+                    this.store.address = StoreById.address;
+                    this.store.phoneNumber = StoreById.phoneNumber;
+                    this.store.storeTaxCode = StoreById.storeTaxCode;
+                    this.store.countryId = StoreById.countryId;
+                    this.store.provinceId = StoreById.provinceId;
+                    this.store.districtId = StoreById.districtId;
+                    this.store.wardId = StoreById.wardId;
+                    this.store.street = StoreById.street;
+                    this.store.createdDate = StoreById.createdDate;
+                    this.store.createdBy = StoreById.createdBy;
+                    this.store.modifiedDate = StoreById.modifiedDate;
+                    this.store.modifiedBy = StoreById.modifiedBy;
+                }else{
+                    this.store.storeId = "";
+                    this.store.storeCode = "";
+                    this.store.storeName = "";
+                    this.store.address = "";
+                    this.store.phoneNumber = "";
+                    this.store.storeTaxCode = "";
+                    this.store.countryId = "";
+                    this.store.provinceId = "";
+                    this.store.districtId = "";
+                    this.store.wardId = "";
+                    this.store.street = "";
+                    this.store.createdDate = "";
+                    this.store.createdBy = "";
+                    this.store.modifiedDate = "";
+                    this.store.modifiedBy = "";
+                }
+            }
+        }
     },
     methods:{
         closeDialog(){

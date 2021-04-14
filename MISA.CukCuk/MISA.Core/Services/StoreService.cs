@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using MISA.Core.Entities;
+using MISA.Core.Exceptions;
 using MISA.Core.Interfaces;
 
 namespace MISA.Core.Services
@@ -17,18 +19,29 @@ namespace MISA.Core.Services
 
         public int Delete(Guid storeId)
         {
-            var res = _storeRepository.Delete(storeId);
-            return res;
+            var store = _storeRepository.GetById(storeId);
+            if(store != null)
+            {
+                var res = _storeRepository.Delete(storeId);
+                return res;
+            }
+            else
+            {
+                throw new ValidateExceptions("Cửa hàng không tồn tại!");
+            }
+
         }
 
         public Store GetByStoreCode(string storeCode)
         {
-            throw new NotImplementedException();
+            var res = _storeRepository.GetByStoreCode(storeCode);
+            return res;
         }
 
         public int GetCountStore()
         {
-            throw new NotImplementedException();
+            var res = _storeRepository.GetCountStore();
+            return res;
         }
 
         public IEnumerable<Store> GetIndexOffset(int position, int offset)
@@ -43,14 +56,68 @@ namespace MISA.Core.Services
 
         public int Insert(Store entity)
         {
-            var res = _storeRepository.Insert(entity);
-            return res;
+            ValidateStore(entity);
+            var store = _storeRepository.GetByStoreCode(entity.StoreCode);
+            if(store == null)
+            {
+                
+                var res = _storeRepository.Insert(entity);
+                return res;
+            }
+            else
+            {
+                throw new ValidateExceptions("Mã cửa hàng bị trùng!");
+            }
+            
         }
 
         public int Update(Store entity, Guid storeId)
         {
-            var res = _storeRepository.Update(entity, storeId);
-            return res;
+            if (storeId == null || storeId == Guid.Empty)
+            {
+                throw new ValidateExceptions("ID cửa hàng không được phép trống!");
+            }
+            ValidateStore(entity);
+            var store = _storeRepository.GetByStoreCode(entity.StoreCode);
+            if (store == null || store.StoreId == storeId)
+            {
+                
+                var res = _storeRepository.Update(entity, storeId);
+                return res;
+            }
+            else
+            {
+                throw new ValidateExceptions("Mã cửa hàng bị trùng!");
+            }
+            
+        }
+
+        public bool ValidateStore(Store store)
+        {
+            if (string.IsNullOrEmpty(store.StoreCode))
+            {
+                return false;
+                throw new ValidateExceptions("Mã cửa hàng không được để trống!");
+                
+            }
+            if (string.IsNullOrEmpty(store.StoreName))
+            {
+                return false;
+                throw new ValidateExceptions("Tên cửa hàng không được để trống!");
+                
+            }
+            if (string.IsNullOrEmpty(store.Address))
+            {
+                return false;
+                throw new ValidateExceptions("Địa chỉ cửa hàng không được để trống!");
+                
+            }
+            if (!Regex.Match(store.PhoneNumber, @"^(\+[0-9]{9})$").Success)
+            {
+                return false;
+                throw new ValidateExceptions("Số điện thoại của cửa hàng không đúng");
+            }
+            return true;
         }
     }
 }

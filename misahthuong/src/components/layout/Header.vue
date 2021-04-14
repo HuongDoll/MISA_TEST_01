@@ -14,10 +14,10 @@
             </div>
             
             <button class="button-new"><img src="../../assets/icon/misasupport_1.png" class="img-new"></button>
-            <button class="notify"> <img></button>
+            <button class="notify"><img></button>
             <button class="help"><img></button>
         </div>
-        <div v-show="isShowAcount" class="setting" @click="ShowAcount"></div>
+        <div v-show="isShowAcount" class="setting" @click="ShowAcount" ></div>
         <div v-show="isShowAcount" class="acount-setting">
             <div  @click="ShowAcount">
                 <img class="icon" src="../../assets/icon/icon-change-password16.png">
@@ -150,6 +150,7 @@ button{
 }
 /*css Cài đặt tài khoản */
 .acount-setting{
+    z-index: 6;
     width: 190px;
     background-color: #ffffff;
     position: absolute;
@@ -174,6 +175,7 @@ button{
     vertical-align: middle;
 }
 .setting{
+    z-index: 5;
     position: absolute;
     width: calc(100% - 150px);
     height: 100vh;

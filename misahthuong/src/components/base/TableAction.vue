@@ -1,6 +1,6 @@
 <template>
     <div class="table-action">
-        <button class="group group-add" @click="openDialog()">
+        <button class="group group-add" @click="openDialog('put')">
           <span class="img add"></span>
           <span class="lable">Thêm mới</span>
         </button>
@@ -8,11 +8,11 @@
           <span class="img double"></span>
           <span class="lable">Nhân bản</span>
         </button>
-        <button class="group">
+        <button class="group"  @click="openDialog('post')" v-bind:class="{ notouch: !isChoose }">
           <span class="img edit"></span>
           <span class="lable">Sửa</span>
         </button>
-        <button class="group">
+        <button class="group" @click="openConfirmDialog()" v-bind:class="{ notouch: !isChoose }">
           <span class="img delete"></span>
           <span class="lable">Xóa</span>
         </button>
@@ -27,14 +27,25 @@ export default {
   name: 'TableAcion',
   props: {
   },
+  computed:{
+    isChoose(){
+      var storeChoose = this.$store.getters.getStoreById.length;
+      console.log("nnnnnnn:  "+storeChoose)
+      if(storeChoose == 0) return false;
+      else return true;
+    },
+  },
   data(){
     return{
       
     }
   },
   methods:{
-    openDialog(){
-      this.$emit("openDialog");
+    openDialog(text){
+      this.$emit("openDialog", text);
+    },
+    openConfirmDialog(){
+      this.$emit("openConfirmDialog");
     }
   }
 }

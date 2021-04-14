@@ -58,34 +58,17 @@
               
             </div>
           </div>
-          <table>
-            <tr class="row">
-              <td class="w-1">138TH</td>
-              <td class="w-2">DODAVI - 318 TÔ HIỆU, HÀ ĐÔNG</td>
-              <td class="w-3">318 TÔ HIỆU, HÀ ĐÔNG</td>
-              <td class="w-1">024 36622666</td>
-              <td class="w-1">Đang hoạt động</td>
-            </tr>
-            <tr class="row">
-              <td class="w-1">138TH</td>
-              <td class="w-2">DODAVI - 318 TÔ HIỆU, HÀ ĐÔNG</td>
-              <td class="w-3">318 TÔ HIỆU, HÀ ĐÔNG</td>
-              <td class="w-1">024 36622666</td>
-              <td class="w-1">Đang hoạt động</td>
-            </tr>
-            <tr class="row">
-              <td class="w-1">138TH</td>
-              <td class="w-2">DODAVI - 318 TÔ HIỆU, HÀ ĐÔNG</td>
-              <td class="w-3">318 TÔ HIỆU, HÀ ĐÔNG</td>
-              <td class="w-1">024 36622666</td>
-              <td class="w-1">Đang hoạt động</td>
-            </tr>
-            <tr class="row">
-              <td class="w-1">138TH</td>
-              <td class="w-2">DODAVI - 318 TÔ HIỆU, HÀ ĐÔNG</td>
-              <td class="w-3">318 TÔ HIỆU, HÀ ĐÔNG</td>
-              <td class="w-1">024 36622666</td>
-              <td class="w-1">Đang hoạt động</td>
+          <table class="tableStore">
+            <tr v-for="(store, index) in dataList" :key="index" 
+            class="row" :ref="index" 
+            @click="choose(index, store.storeId)" 
+            @dblclick="updateStore()"
+            v-bind:class="{ rowChoose: (rowChoose == index) }">
+              <td class="w-1">{{store.storeCode}}</td>
+              <td class="w-2">{{store.storeName}}</td>
+              <td class="w-3">{{store.address}}</td>
+              <td class="w-1">{{store.phoneNumber}}</td>
+              <td class="w-1">{{fomatStatusStore(store.status)}}</td>
             </tr>
           </table>
           
@@ -114,17 +97,42 @@ export default {
   name: 'TableContent',
   props: {
   },
+  created(){
+    this.$store.dispatch('getStores')
+  },
+  computed:{
+    dataList(){
+      console.log(this.$store.getters.getStores)
+        return this.$store.getters.getStores
+    }
+  },
   data(){
     return{
       pageNumber : 1,
+      rowChoose : null,
     }
   },
   methods:{
+    fomatStatusStore(code){
+      if(code == 0) return "Ngưng hoạt động";
+      else return "Đang hoạt động"
+    },
+    choose(index, storeId){
+      console.log("storeId");
+      this.rowChoose = index;
+      this.$store.dispatch('getStoreById', storeId);
+      console.log(this.$store.getters.getStoreById);
+    },
+    updateStore(){
+      this.$emit("openStoreDialog", "post")
+    }
   }
 }
 </script>
 <style scoped>
-
+.rowChoose{
+  background-color: #e2e4f1 !important;
+}
 .table-content{
     width: calc(100% - 16px);
     height: calc(100vh - 104px);
@@ -137,12 +145,16 @@ export default {
   border-bottom: 4px solid #d0d0d0 ;
   font-size: 13px;
   overflow-x: scroll;
+  overflow-y: visible;
+  
 }
 .heading{
   height: 32px;
   display: flex;
   color: #212121;
   background-color: #f0f0f0;
+  position: sticky;
+  top: 0px;
 }
 .heading span{
   text-align: center;
@@ -151,10 +163,14 @@ export default {
   border-bottom: 1px solid #d0d0d0 ;
   padding: 8px;
 }
-table{
+.tableStore{
   border-spacing: 0px;
   width: 100%;
+  height: calc(100vh - 356px);
+  max-height: 200px;
+  overflow-y: scroll;
 }
+
 /* css cho table */
 tr:nth-child(even){background-color: #f6f6f6;}
 
@@ -177,12 +193,15 @@ tr::before {background-color: #e2e4f1;}
 .group{
   height: 33px;
   display: flex;
+  position: sticky;
+  top: 32px;
+  background-color: #f0f0f0;
 }
 .group .group-input{
   border-right: 1px solid #d0d0d0 ;
   border-bottom: 1px solid #d0d0d0 ;
   display: flex;
-  padding: 1px;
+  padding: 0px 1px;
 }
 .group-input input{
   width: 100%;

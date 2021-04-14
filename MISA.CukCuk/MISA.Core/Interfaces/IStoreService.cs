@@ -16,5 +16,6 @@ namespace MISA.Core.Interfaces
         IEnumerable<Store> GetStoreFitter(string storeCode, string storeName, string address, string phoneNumber, int status);
         int Insert(Store entity);
         int Update(Store entity, Guid storeId);
+        bool ValidateStore(Store store);
     }
 }

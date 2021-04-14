@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MISA.Core.Interfaces;
+using MISA.Eshop.Result;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -32,32 +33,49 @@ namespace MISA.Eshop.Controllers
         public IActionResult Get()
         {
             // lấy dữ liệu từ database
-
+            var res = new ResponeResult();
             var entities = _baseService.GetEntities();
             // Kiểm tra dữ liệu trả về
-            if (entities.Count() == 0)
+            if (entities == null)
             {
-                return NoContent();
+                res.OnBadRequest(res);
+                res.DevMsg = "Không có data !";
+                res.UserMsg = "Không có dữ liệu !";
+                res.Data = entities;
+                return Ok(res);
             }
             else
             {
-                return Ok(entities);
+                res.OnSuccess(res);
+                res.DevMsg = "Lấy dữ liệu thành công!";
+                res.UserMsg = "Lấy dữ liệu thành công!";
+                res.Data = entities;
+                return Ok(res);
             }
         }
 
         [HttpGet("{entityId}")]
         public IActionResult Get(Guid entityId)
         {
+            var res = new ResponeResult();
             // lấy dữ liệu từ database
             var entitie = _baseService.GetById(entityId);
             // Kiểm tra dữ liệu trả về
             if (entitie == null)
             {
-                return NoContent();
+                res.OnBadRequest(res);
+                res.DevMsg = "Không có data !";
+                res.UserMsg = "Không tìm thấy khách hàng !";
+                res.Data = entitie;
+                return Ok(res);
             }
             else
             {
-                return Ok(entitie);
+                res.OnSuccess(res);
+                res.DevMsg = "Lấy dữ liệu thành công!";
+                res.UserMsg = "Lấy dữ liệu thành công!";
+                res.Data = entitie;
+                return Ok(res);
             }
         }
 
