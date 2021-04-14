@@ -22,3 +22,15 @@ C:\Users\hthuong\source\MISA_TEST\MISA_TEST_01\MISA.CukCuk\MISA.Core\bin\Debug\n
 C:\Users\hthuong\source\MISA_TEST\MISA_TEST_01\MISA.CukCuk\MISA.Core\bin\Debug\net5.0\MISA.Core.dll
 C:\Users\hthuong\source\MISA_TEST\MISA_TEST_01\MISA.CukCuk\MISA.Core\bin\Debug\net5.0\ref\MISA.Core.dll
 C:\Users\hthuong\source\MISA_TEST\MISA_TEST_01\MISA.CukCuk\MISA.Core\bin\Debug\net5.0\MISA.Core.pdb
+H:\MISA.Web2021_03\MISA_TEST_01\MISA_TEST_01\MISA.CukCuk\MISA.Core\bin\Debug\net5.0\MISA.Core.deps.json
+H:\MISA.Web2021_03\MISA_TEST_01\MISA_TEST_01\MISA.CukCuk\MISA.Core\bin\Debug\net5.0\MISA.Core.dll
+H:\MISA.Web2021_03\MISA_TEST_01\MISA_TEST_01\MISA.CukCuk\MISA.Core\bin\Debug\net5.0\ref\MISA.Core.dll
+H:\MISA.Web2021_03\MISA_TEST_01\MISA_TEST_01\MISA.CukCuk\MISA.Core\bin\Debug\net5.0\MISA.Core.pdb
+H:\MISA.Web2021_03\MISA_TEST_01\MISA_TEST_01\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\MISA.Core.csprojAssemblyReference.cache
+H:\MISA.Web2021_03\MISA_TEST_01\MISA_TEST_01\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\MISA.Core.GeneratedMSBuildEditorConfig.editorconfig
+H:\MISA.Web2021_03\MISA_TEST_01\MISA_TEST_01\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\MISA.Core.AssemblyInfoInputs.cache
+H:\MISA.Web2021_03\MISA_TEST_01\MISA_TEST_01\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\MISA.Core.AssemblyInfo.cs
+H:\MISA.Web2021_03\MISA_TEST_01\MISA_TEST_01\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\MISA.Core.csproj.CoreCompileInputs.cache
+H:\MISA.Web2021_03\MISA_TEST_01\MISA_TEST_01\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\MISA.Core.dll
+H:\MISA.Web2021_03\MISA_TEST_01\MISA_TEST_01\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\ref\MISA.Core.dll
+H:\MISA.Web2021_03\MISA_TEST_01\MISA_TEST_01\MISA.CukCuk\MISA.Core\obj\Debug\net5.0\MISA.Core.pdb

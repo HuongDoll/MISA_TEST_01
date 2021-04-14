@@ -1,7 +1,7 @@
 <template>
     <div class="main">
-      <TableAction @openDialog="openDialog" @openConfirmDialog="openConfirmDialog"/>
-      <TableContent @openStoreDialog="openDialog" />
+      <TableAction @openDialog="openDialog" @openConfirmDialog="openConfirmDialog" :isChoosed="isChoosed"/>
+      <TableContent @openStoreDialog="openDialog" @click="clickRow"/>
       <StoreDialog v-show="isShowDialog" :isShowDialog="isShowDialog" :msg="msg" @closeDialog="closeDialog" />
       <ConfirmDialog v-show="isShowConfirmDialog" @closeDialog="closeConfirmDialog" />
     </div>
@@ -26,7 +26,8 @@ export default {
     return{
       isShowDialog : false,
       isShowConfirmDialog : false,
-      msg : "put"
+      msg : "put",
+      isChoosed : false,
     }
   },
   methods:{
@@ -43,6 +44,9 @@ export default {
     },
     openConfirmDialog(){
       this.isShowConfirmDialog = true;
+    },
+    clickRow(){
+      this.isChoosed = true;
     }
   }
 }

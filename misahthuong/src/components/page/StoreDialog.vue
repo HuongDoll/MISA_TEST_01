@@ -3,22 +3,40 @@
         <div class="confirmDialog" @click="closeDialog"></div>
         <div class="content">
             <div class="title">
-                <span>Thêm mới cửa hàng</span>
+                <span>{{titleName}}</span>
                 <button type="button" @click="closeDialog"></button>
             </div>
             <div class="main-content">
                 <span tabindex="1" @focus="tabIndexLast()"></span>
                 <div class="groupdb w-full">
                     <span class="lable">Mã cửa hàng <span class="text-red">*</span> </span>
-                    <input v-model="store.storeCode" class="input" type="text" name="" id="" tabindex="2" ref="storeCode">
+                    <input v-model="store.storeCode" 
+                    class="input" type="text" name="" id="" tabindex="2" ref="storeCode" 
+                    @blur="tab('storeCode')"
+                    v-bind:class="{ borderRed : !validates.storeCode}">
+                    <div v-show="!validates.storeCode" class="div_error">
+                        <img src="../../assets/icon/exclamation.png" >
+                    <span class="title_error">Trường này không được để trống</span>
+                    </div>
+                    
                 </div>
                 <div class="groupdb w-full">
                     <span class="lable">Tên cửa hàng <span class="text-red">*</span> </span>
-                    <input v-model="store.storeName" class="input" type="text" name="" id="" tabindex="3">
+                    <input v-model="store.storeName" class="input" type="text" name="" id="" tabindex="3"
+                    v-bind:class="{ borderRed : !validates.storeName}" @blur="tab('storeName')">
+                    <div v-show="!validates.storeName" class="div_error">
+                        <img src="../../assets/icon/exclamation.png" >
+                    <span class="title_error">Trường này không được để trống</span>
+                    </div>
                 </div>
                 <div class="groupdb w-full">
                     <span class="lable">Địa chỉ <span class="text-red">*</span> </span>
-                    <textarea v-model="store.address"  name="" id="" rows="5" tabindex="4"></textarea>
+                    <textarea v-model="store.address"  name="" id="" rows="5" tabindex="4"
+                    v-bind:class="{ borderRed : !validates.address}" @blur="tab('address')"></textarea>
+                    <div v-show="!validates.address" class="div_error">
+                        <img src="../../assets/icon/exclamation.png" >
+                    <span class="title_error">Trường này không được để trống</span>
+                    </div>
                 </div>
                 <div class="groupdb w-full">
                     <div class="group-l w-haf">
@@ -65,15 +83,15 @@
                     <span >Trợ giúp</span>
                 </div>
                 <div class="group-button">
-                    <button class="button-save" tabindex="13">
+                    <button class="button-save" tabindex="13" @click="save">
                         <span class="img"></span>
                         <span class="label">Lưu</span>
                     </button>
-                    <button class="button-add" tabindex="14">
+                    <button class="button-add" tabindex="14"  @click="saveAndNew">
                         <span class="img"></span>
                         <span class="label">Lưu và thêm mới</span>
                     </button>
-                    <button class="button-cancel" tabindex="15">
+                    <button class="button-cancel" tabindex="15" @click="closeDialog">
                         <span class="img"></span>
                         <span class="label">Hủy bỏ</span>
                     </button>
@@ -110,6 +128,12 @@ export default {
             createdBy: null,
             modifiedDate: null,
             modifiedBy: null
+        },
+        titleName: "",
+        validates: {
+            storeCode : true,
+            storeName: true,
+            address: true,
         }
     }
     },
@@ -118,7 +142,8 @@ export default {
             console.log(this.$store.getters.getStoreById.length);
             if(this.isShowDialog == true){
                 if(this.msg == "post"){
-                    var StoreById = this.$store.getters.getStoreById[0]
+                    this.titleName = "Sửa cửa hàng";
+                    var StoreById = this.$store.getters.getStoreById[0];
                     this.store.storeId = StoreById.storeId;
                     this.store.storeCode = StoreById.storeCode;
                     this.store.storeName = StoreById.storeName;
@@ -135,6 +160,7 @@ export default {
                     this.store.modifiedDate = StoreById.modifiedDate;
                     this.store.modifiedBy = StoreById.modifiedBy;
                 }else{
+                    this.titleName = "Thêm mới cửa hàng";
                     this.store.storeId = "";
                     this.store.storeCode = "";
                     this.store.storeName = "";
@@ -163,11 +189,44 @@ export default {
         },
         tabIndexLast(){
             this.$refs.storeAddress.focus();
+        },
+        tab(value){
+            console.log(value)
+        },
+        save(){
+
+        },
+        saveAndNew(){
+
+        },
+        validate(){
+
         }
     }
 }
 </script>
 <style scoped>
+.title_error{
+    font-size: 13px;
+    position: fixed;
+    left: calc(50% + 285px);
+    color: #ffffff;;
+    background-color: rgb(233, 61, 61);
+    padding: 4px;
+    border-radius: 2px;
+    display: none;
+}
+.div_error{
+    width: 16px;
+    height: 16px;
+    padding: 4px;
+}
+.div_error:hover .title_error{
+    display: block;
+}
+.borderRed{
+    border: 1px solid #cf4c35 ;
+}
 .text-red{
     color: red;
 }
@@ -225,6 +284,12 @@ export default {
 .groupdb{
     display: flex;
     padding: 4px 16px;
+}
+.groupdb img{
+    width: 16px;
+    height: 16px;
+    margin: 0 4px;
+    text-align: center;
 }
 .group-l {
     display: flex;
@@ -290,6 +355,7 @@ input:focus{
 }
 .lable{
     width: 100px;
+    min-width: 100px;
     font-size: 13px;
     color: #212121;
     padding-top: 4px;

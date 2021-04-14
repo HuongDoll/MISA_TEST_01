@@ -122,9 +122,10 @@ export default {
       this.rowChoose = index;
       this.$store.dispatch('getStoreById', storeId);
       console.log(this.$store.getters.getStoreById);
+      this.$emit("click")
     },
     updateStore(){
-      this.$emit("openStoreDialog", "post")
+      this.$emit("openStoreDialog", "post");
     }
   }
 }
@@ -273,7 +274,7 @@ tr::before {background-color: #e2e4f1;}
 }
 .page-bar .text-right{
   position: absolute;
-  right: 8px;
+  right: 24px;
   bottom: 28px;
 }
 .page-bar span{

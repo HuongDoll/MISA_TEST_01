@@ -40,8 +40,9 @@ export default {
   },
   computed:{
     storeName(){
-      console.log(this.$store.getters.getStoreById)
-        return this.$store.getters.getStoreById[0].storeName;
+        console.log(this.$store.getters.getStoreById)
+        if(this.$store.getters.getStoreById.length != 0) return this.$store.getters.getStoreById[0].storeName;
+        else return null;
     }
   },
   methods:{
