@@ -13,7 +13,7 @@ namespace MISA.Core.Interfaces
         int GetCountStore();
         IEnumerable<Store> GetIndexOffset(int position, int offset);
         Store GetByStoreCode(string storeCode);
-        IEnumerable<Store> GetStoreFitter(string storeCode, string storeName, string address, string phoneNumber, int status);
+        IEnumerable<Store> GetStoreFilter(string storeCode, string storeName, string address, string phoneNumber, int status);
         int Insert(Store entity);
         int Update(Store entity, Guid storeId);
 

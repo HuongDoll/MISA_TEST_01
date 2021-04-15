@@ -46,12 +46,14 @@ namespace MISA.Core.Services
 
         public IEnumerable<Store> GetIndexOffset(int position, int offset)
         {
-            throw new NotImplementedException();
+            var res = _storeRepository.GetIndexOffset(position, offset);
+            return res;
         }
 
-        public IEnumerable<Store> GetStoreFitter(string storeCode, string storeName, string address, string phoneNumber, int status)
+        public IEnumerable<Store> GetStoreFilter(string storeCode, string storeName, string address, string phoneNumber, int status)
         {
-            throw new NotImplementedException();
+            var res = _storeRepository.GetStoreFilter(storeCode, storeName, address, phoneNumber, status);
+            return res;
         }
 
         public int Insert(Store entity)

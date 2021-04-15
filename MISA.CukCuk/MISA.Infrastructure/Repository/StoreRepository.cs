@@ -19,8 +19,7 @@ namespace MISA.Infrastructure.Repository
             string paramName = $"@{_tableName}Id";
             dynamicParameters.Add(paramName, storeId);
             var entity = _dbConnection.Execute(storeName, param: dynamicParameters, commandType: CommandType.StoredProcedure);
-            if (entity != null) return 1;
-            else return 0;
+            return entity;
         }
 
         public Store GetByStoreCode(string storeCode)
@@ -36,18 +35,32 @@ namespace MISA.Infrastructure.Repository
 
         public int GetCountStore()
         {
-            string storeName = $"Proc_GetCount{_tableName}s";
+            string storeName = "Proc_GetCountStores";
             var entity = _dbConnection.Execute(storeName, commandType: CommandType.StoredProcedure);
             return entity;
         }
 
         public IEnumerable<Store> GetIndexOffset(int position, int offset)
         {
-            throw new NotImplementedException();
+            string storeName = "Proc_GetStoreByIndexOffset";
+            DynamicParameters dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("positionStart", position);
+            dynamicParameters.Add("offset", offset);
+            var entities = _dbConnection.Query<Store>(storeName, param: dynamicParameters, commandType: CommandType.StoredProcedure);
+            return entities;
         }
 
-        public IEnumerable<Store> GetStoreFitter(string storeCode, string storeName, string address, string phoneNumber, int status)
+        public IEnumerable<Store> GetStoreFilter(string storeCode, string storeNamee, string address, string phoneNumber, int status)
         {
+            string storeName = "Proc_GetStoreFilter";
+            DynamicParameters dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("storeCode", storeCode);
+            dynamicParameters.Add("storeName", storeNamee);
+            dynamicParameters.Add("address", address);
+            dynamicParameters.Add("phoneNumber", phoneNumber);
+            dynamicParameters.Add("status", status);
+            var entities = _dbConnection.Query<Store>(storeName, param: dynamicParameters, commandType: CommandType.StoredProcedure);
+            return entities;
             throw new NotImplementedException();
         }
 

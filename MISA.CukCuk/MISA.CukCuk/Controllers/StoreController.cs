@@ -18,8 +18,13 @@ namespace MISA.Eshop.Controllers
             _storeService = storeService;
 
         }
-
+        /// <summary>
+        /// Xóa cửa hàng
+        /// </summary>
+        /// <param name="entityId"> id của cửa hàng cần xóa</param>
+        /// <returns>số bản ghi bị ảnh hưởng</returns>
         [HttpDelete("{entityId}")]
+        
         public IActionResult Delete(Guid entityId)
         {
             var res = new ResponeResult();
@@ -43,7 +48,11 @@ namespace MISA.Eshop.Controllers
                 return Ok(res);
             }
         }
-
+        /// <summary>
+        /// Thêm mới cửa hàng
+        /// </summary>
+        /// <param name="store">thông tin cửa hàng</param>
+        /// <returns>số bản ghi bị ảnh hường</returns>
         [HttpPost]
         public IActionResult Post(Store store)
         {
@@ -69,6 +78,12 @@ namespace MISA.Eshop.Controllers
                 return Ok(res);
             }
         }
+        /// <summary>
+        /// chỉnh sửa thông tin cửa hàng
+        /// </summary>
+        /// <param name="entityId">id cửa hàng </param>
+        /// <param name="store"> thông tin cửa hàng</param>
+        /// <returns></returns>
         [HttpPut("{entityId}")]
         public IActionResult Put(Guid entityId, Store store)
         {
@@ -92,6 +107,54 @@ namespace MISA.Eshop.Controllers
                 res.Data = entitie;
                 return Ok(res);
             }
+        }
+
+        [HttpGet("{position}/{offset}")]
+        public IActionResult GetIndexOffset(int position, int offset)
+        {
+            var res = new ResponeResult();
+            // lấy dữ liệu từ database
+            var entitie = _storeService.GetIndexOffset(position, offset);
+            // Kiểm tra dữ liệu trả về
+            
+            res.OnSuccess(res);
+            res.DevMsg = "Lấy thông tin thành công!";
+            res.UserMsg = "Lấy thông tin cửa hàng thành công!";
+            res.Data = entitie;
+            return Ok(res);
+            
+        }
+
+        [HttpGet("{storeCode}/{storeName}/{address}/{phoneNumber}/{status}")]
+        public IActionResult GetStoreFilter(string storeCode, string storeName, string address, string phoneNumber, int status)
+        {
+            var res = new ResponeResult();
+            // lấy dữ liệu từ database
+            var entitie = _storeService.GetStoreFilter(storeCode, storeName, address, phoneNumber, status);
+            // Kiểm tra dữ liệu trả về
+
+            res.OnSuccess(res);
+            res.DevMsg = "Lấy thông tin thành công!";
+            res.UserMsg = "Lấy thông tin cửa hàng thành công!";
+            res.Data = entitie;
+            return Ok(res);
+
+        }
+
+        [HttpGet("count")]
+        public IActionResult GetCount()
+        {
+            var res = new ResponeResult();
+            // lấy dữ liệu từ database
+            var entitie = _storeService.GetCountStore();
+            // Kiểm tra dữ liệu trả về
+
+            res.OnSuccess(res);
+            res.DevMsg = "Lấy thông tin thành công!";
+            res.UserMsg = "Lấy thông tin cửa hàng thành công!";
+            res.Data = entitie;
+            return Ok(res);
+
         }
     }
 }

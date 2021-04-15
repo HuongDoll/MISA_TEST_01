@@ -17,7 +17,7 @@
                 <option value="">- : Kết thức bằng</option>
                 <option value="">! : Không chứa</option>
               </select>
-              <input type="text" name="" id="">
+              <input type="text" name="" id="" v-model="filter.storeCode">
             </div>
             <div class="wi-2 group-input">
               <select class="select">
@@ -27,7 +27,7 @@
                 <option value="">- : Kết thức bằng</option>
                 <option value="">! : Không chứa</option>
               </select>
-              <input type="text" name="" id="">
+              <input type="text" name="" id="" v-model="filter.storeName">
             </div>
             <div class="wi-3 group-input">
               <select class="select">
@@ -37,7 +37,7 @@
                 <option value="">- : Kết thức bằng</option>
                 <option value="">! : Không chứa</option>
               </select>
-              <input type="text" name="" id="">
+              <input type="text" name="" id="" v-model="filter.address">
             </div>
             <div class="wi-1 group-input">
               <select class="select">
@@ -47,13 +47,13 @@
                 <option value="">- : Kết thức bằng</option>
                 <option value="">! : Không chứa</option>
               </select>
-              <input type="text" name="" id="">
+              <input type="text" name="" id="" v-model="filter.phoneNumber">
             </div>
             <div class="wi-1 group-input">
-              <select class="status">
+              <select class="status" v-model="filter.status">
                 <option value="">Tất cả</option>
-                <option value="" selected>Đang hoạt động</option>
-                <option value="">Ngưng hoạt động</option>
+                <option :value=1 selected>Đang hoạt động</option>
+                <option :value=0>Ngưng hoạt động</option>
               </select>
               
             </div>
@@ -112,7 +112,22 @@ export default {
       console.log(this.$store.getters.getMsg);
       this.rowChoose = null;
       this.$emit("click", false);
-      this.$store.dispatch('getStores');
+      this.$store.dispatch('getStoreByFilter', this.filter);
+    },
+    'filter.storeCode'() {
+      this.$store.dispatch('getStoreByFilter', this.filter);
+    },
+    'filter.address'() {
+      this.$store.dispatch('getStoreByFilter', this.filter);
+    },
+    'filter.storeName'() {
+      this.$store.dispatch('getStoreByFilter', this.filter);
+    },
+    'filter.phoneNumber'() {
+      this.$store.dispatch('getStoreByFilter', this.filter);
+    },
+    'filter.status'() {
+      this.$store.dispatch('getStoreByFilter', this.filter);
     }
   },
   computed:{
@@ -131,6 +146,13 @@ export default {
     return{
       pageNumber : 1,
       rowChoose : null,
+      filter: {
+        storeCode : "",
+        storeName : "", 
+        address : "", 
+        phoneNumber : "", 
+        status : ""
+      }
     }
   },
   methods:{
@@ -202,6 +224,7 @@ export default {
   font-weight: 700;
   border-right: 1px solid #d0d0d0 ;
   border-bottom: 1px solid #d0d0d0 ;
+  background-color: #f0f0f0;
   padding: 8px;
 }
 .tableStore{

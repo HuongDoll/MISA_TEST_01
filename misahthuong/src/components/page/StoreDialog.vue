@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="confirmDialog" @click="closeDialog"></div>
+    <div class="confirmDialog" ></div>
     <div class="content">
       <div class="title">
         <span>{{ titleName }}</span>
@@ -102,7 +102,7 @@
         <div class="groupdb w-full">
           <div class="group group-l w-haf">
             <span class="lable">Quốc gia</span>
-            <select v-model="store.countryId" name="" id="" tabindex="7" @click="selectCountry">
+            <select v-model="store.countryId" name="" id="" tabindex="7" >
               <option value="null" selected disabled>Chọn quốc gia</option>
               <option
                 v-for="(country, index) in countries"
@@ -122,9 +122,9 @@
               <option
                 v-for="(province, index) in provinces"
                 :key="index"
-                :value="country.countryId"
+                :value="province.provinceId"
               >
-                {{ country.countryName }}
+                {{ province.provinceName }}
               </option>
             </select>
           </div>
@@ -135,9 +135,9 @@
               <option
                 v-for="(district, index) in districts"
                 :key="index"
-                :value="country.countryId"
+                :value="district.districtId"
               >
-                {{ country.countryName }}
+                {{ district.districtName }}
               </option>
             </select>
           </div>
@@ -150,9 +150,9 @@
               <option
                 v-for="(ward, index) in wards"
                 :key="index"
-                :value="country.countryId"
+                :value="ward.wardId"
               >
-                {{ country.countryName }}
+                {{ ward.wardName }}
               </option>
             </select>
           </div>
@@ -204,7 +204,6 @@ export default {
   },
   created() {
     this.$store.dispatch("getCountries");
-    this.$store.dispatch('getProvinces', "469b3ece-744a-45d5-957d-e8c757976496");
   },
   computed: {
     countries() {
@@ -305,22 +304,25 @@ export default {
         }
       }
     },
-    // 'store.countryId'(){
-    //     console.log(this.store.countryId)
-    //     this.$store.dispatch("getProvinces", this.store.countryId);
-    // },
-//     'store.provinceId'(){
-//         this.$store.dispatch("getDistricts", this.store.provinceId);
-//     },
-//     'store.districtId'(){
-//         this.$store.dispatch("getWards", this.store.districtId);
-//     }
+    'store.countryId'(){
+        console.log(this.store.countryId)
+        if(this.store.countryId != null) this.$store.dispatch("getProvinces", this.store.countryId);
+        this.store.provinceId = null;
+        this.store.districtId = null;
+        this.store.wardId = null;
+    },
+    'store.provinceId'(){
+        if(this.store.provinceId != null) this.$store.dispatch("getDistricts", this.store.provinceId);
+        this.store.districtId = null;
+        this.store.wardId = null;
+    },
+    'store.districtId'(){
+        if(this.store.districtId != null) this.$store.dispatch("getWards", this.store.districtId);
+        this.store.wardId = null;
+    }
   },
   methods: {
-    selectCountry(){
-        console.log(this.store.countryId);
-        // this.$store.dispatch("getProvinces", this.store.countryId);
-    },
+    
     closeDialog() {
       this.$emit("closeDialog");
     },

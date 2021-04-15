@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="confirmDialog" @click="closeDialog"></div>
+        <div class="confirmDialog" ></div>
         <div class="content">
             <div class="title">
                 <span>Xóa dữ liệu</span>

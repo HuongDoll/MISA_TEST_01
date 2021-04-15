@@ -9,8 +9,8 @@ const store = new Vuex.Store({
         stores: [],
         storeById: [],
         action: 0,
-        msg: "Thành công!", 
-        loadData: false, 
+        msg: "Thành công!",
+        loadData: false,
         // address
         countries: [],
         districts: [],
@@ -33,19 +33,19 @@ const store = new Vuex.Store({
         getWards(state) {
             return state.wards;
         },
-        getStoreById(state){
+        getStoreById(state) {
             console.log("getter storeId")
             return state.storeById;
         },
-        getAction(state){
+        getAction(state) {
             console.log("getter storeId")
             return state.action;
         },
-        getMsg(state){
+        getMsg(state) {
             console.log("getter storeId")
             return state.msg;
         },
-        getLoadData(state){
+        getLoadData(state) {
             console.log("getter storeId")
             return state.loadData;
         },
@@ -74,27 +74,27 @@ const store = new Vuex.Store({
             state.stores.unshift(store);
             console.log(state.stores);
         },
-        getStoreById(state, storeId){
+        getStoreById(state, storeId) {
             state.storeById = state.stores.filter(p => p.storeId == storeId);
         },
-        addAction(state){
+        addAction(state) {
             state.action++;
         },
-        success(state){
+        success(state) {
             state.msg = "Thành công!";
         },
-        error(state){
+        error(state) {
             state.msg = "Có lỗi xảy ra!";
         },
-        loading(state){
+        loading(state) {
             state.loadData = false;
         },
-        loaded(state){
+        loaded(state) {
             state.loadData = true;
         }
     },
     actions: {
-        getStoreById(context, storeId){
+        getStoreById(context, storeId) {
             context.commit("getStoreById", storeId)
         },
         getCountries(context) {
@@ -108,16 +108,16 @@ const store = new Vuex.Store({
         },
         getDistricts(context, entityId) {
             console.log(entityId, context)
-            // axios.get('https://localhost:44379/api/District/WithParent/'+ entityId)
-            //     .then(response => {
-            //         console.log(response)
-            //         context.commit("setDistricts", response.data.data)
-            //     })
+            axios.get('https://localhost:44379/api/District/WithParent/' + entityId)
+                .then(response => {
+                    console.log(response)
+                    context.commit("setDistricts", response.data.data)
+                })
 
         },
         getProvinces(context, entityId) {
             console.log("getdata")
-            axios.get('https://localhost:44379/api/Province/WithParent/'+ entityId)
+            axios.get('https://localhost:44379/api/Province/WithParent/' + entityId)
                 .then(response => {
                     console.log(response)
                     context.commit("setProvinces", response.data.data)
@@ -126,14 +126,14 @@ const store = new Vuex.Store({
         },
         getWards(context, entityId) {
             console.log("getdata")
-            axios.get('https://localhost:44379/api/Ward/WithParent/'+ entityId)
+            axios.get('https://localhost:44379/api/Ward/WithParent/' + entityId)
                 .then(response => {
                     console.log(response)
                     context.commit("setWards", response.data.data)
                 })
 
         },
-        
+
         getStores(context) {
             context.commit("loading");
             console.log("getdata")
@@ -144,7 +144,28 @@ const store = new Vuex.Store({
                     context.commit("setStores", response.data.data)
                 })
 
-        }, 
+        },
+        getStoreByFilter(context, filter) {
+            context.commit("loading");
+            if (filter.storeCode == "") var storeCode = "%20";
+            else storeCode = filter.storeCode;
+            if (filter.storeName == "") var storeName = "%20";
+            else storeName = filter.storeName;
+            if (filter.address == "") var address = "%20";
+            else address = filter.address;
+            if (filter.phoneNumber == "") var phoneNumber = "%20";
+            else phoneNumber = filter.phoneNumber;
+            // if (filter.status == "") var status = 1;
+            var status = filter.status;
+            console.log('https://localhost:44379/api/Store/' + storeCode + '/' + storeName + '/' + address + '/' + phoneNumber + '/' + status)
+            axios.get('https://localhost:44379/api/Store/' + storeCode + '/' + storeName + '/' + address + '/' + phoneNumber + '/' + status)
+                .then(response => {
+                    console.log(response)
+                    context.commit("loaded");
+                    context.commit("setStores", response.data.data)
+                })
+
+        },
         deleteStore(context, storeId) {
 
             axios.delete('https://localhost:44379/api/Store/' + storeId)
@@ -158,41 +179,41 @@ const store = new Vuex.Store({
                     context.commit("error");
                 })
         },
-        insertStore(context, store){
+        insertStore(context, store) {
             console.log("insertStore");
             console.log(store);
             axios({
-                method: "post",
-                url: "https://localhost:44379/api/Store",
-                data: store,
-            }).then(response => {
-                console.log(JSON.parse(response.config.data));
-                context.commit("addAction");
-                context.commit("success");
-            })
-            .catch(error => {
-                console.log(error);
-                context.commit("error");
-            });
+                    method: "post",
+                    url: "https://localhost:44379/api/Store",
+                    data: store,
+                }).then(response => {
+                    console.log(JSON.parse(response.config.data));
+                    context.commit("addAction");
+                    context.commit("success");
+                })
+                .catch(error => {
+                    console.log(error);
+                    context.commit("error");
+                });
         },
-        updateStore(context, store){
+        updateStore(context, store) {
             console.log("store");
             console.log(store);
             axios({
-                method: "put",
-                url: 'https://localhost:44379/api/Store/' + store.storeId,
-                data: store,
-            }).then(response => {
-                console.log("response.data");
-                console.log(JSON.parse(response.config.data));
-                context.commit("addAction");
-                context.commit("success");
-            })
-            .catch(error => {
-                console.log(error);
-                context.commit("error");
-                console.log(store);
-            });
+                    method: "put",
+                    url: 'https://localhost:44379/api/Store/' + store.storeId,
+                    data: store,
+                }).then(response => {
+                    console.log("response.data");
+                    console.log(JSON.parse(response.config.data));
+                    context.commit("addAction");
+                    context.commit("success");
+                })
+                .catch(error => {
+                    console.log(error);
+                    context.commit("error");
+                    console.log(store);
+                });
         },
     }
 })
