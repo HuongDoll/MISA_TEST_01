@@ -10,6 +10,16 @@ namespace MISA.Core.Services
 {
     public class ProvinceService : BaseService<Province>, IProvinceService
     {
-        public ProvinceService(IProvinceRepository provinceRepository) : base(provinceRepository) { }
+        
+        IProvinceRepository _provinceRepository;
+        public ProvinceService(IProvinceRepository provinceRepository) : base(provinceRepository)
+        {
+            _provinceRepository = provinceRepository;
+        }
+        public IEnumerable<Province> GetProvinceWithCountry(Guid entityId)
+        {
+            var entities = _provinceRepository.GetProvinceWithCountry(entityId);
+            return entities;
+        }
     }
 }

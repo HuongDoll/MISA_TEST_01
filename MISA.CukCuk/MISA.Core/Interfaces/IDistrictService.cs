@@ -9,5 +9,6 @@ namespace MISA.Core.Interfaces
 {
     public interface IDistrictService : IBaseService<District>
     {
+        IEnumerable<District> GetDistrictWithProvince(Guid entityId);
     }
 }

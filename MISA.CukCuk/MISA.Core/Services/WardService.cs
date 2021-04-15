@@ -10,6 +10,15 @@ namespace MISA.Core.Services
 {
     public class WardService : BaseService<Ward>, IWardService
     {
-        public WardService(IWardRepository wardRepository) : base(wardRepository) { }
+        IWardRepository _wardRepository;
+        public WardService(IWardRepository wardRepository) : base(wardRepository)
+        {
+            _wardRepository = wardRepository;
+        }
+        public IEnumerable<Ward> GetWardWithDistrict(Guid entityId)
+        {
+            var entities = _wardRepository.GetWardWithDistrict(entityId);
+            return entities;
+        }
     }
 }

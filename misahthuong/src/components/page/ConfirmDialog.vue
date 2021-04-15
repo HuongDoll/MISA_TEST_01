@@ -13,7 +13,7 @@
             <div class="footer">
                 
                 <div class="group-button">
-                    <button class="button-delete" >
+                    <button class="button-delete" @click="deleteStore">
                         <img src="../../assets/icon/delete-white.png">
                         <span class="label">Xóa</span>
                     </button>
@@ -49,7 +49,12 @@ export default {
       closeDialog(){
           this.$emit('closeDialog');
       },
-      
+      deleteStore(){
+          var storeId = this.$store.getters.getStoreById[0].storeId;
+          if(storeId != "") this.$store.dispatch('deleteStore', storeId);
+          this.closeDialog();
+          this.$emit("notify");
+      }
   }
 }
 </script>

@@ -44,11 +44,12 @@ namespace MISA.Eshop.Controllers
             }
         }
 
-        [HttpPut]
-        public IActionResult put(Store store)
+        [HttpPost]
+        public IActionResult Post(Store store)
         {
             var res = new ResponeResult();
             // lấy dữ liệu từ database
+            store.StoreId = new Guid();
             var entitie = _storeService.Insert(store);
             // Kiểm tra dữ liệu trả về
             if (entitie == 0)
@@ -68,8 +69,8 @@ namespace MISA.Eshop.Controllers
                 return Ok(res);
             }
         }
-        [HttpPost("{entityId}")]
-        public IActionResult Post(Guid entityId, Store store)
+        [HttpPut("{entityId}")]
+        public IActionResult Put(Guid entityId, Store store)
         {
             var res = new ResponeResult();
             // lấy dữ liệu từ database

@@ -58,7 +58,11 @@
               
             </div>
           </div>
-          <table class="tableStore">
+          <div v-show="!isLoaded" class="loading">
+            <div class="loader"></div>
+            <div class="text">Đang nạp dữ liệu</div>
+          </div>
+          <table  class="tableStore">
             <tr v-for="(store, index) in dataList" :key="index" 
             class="row" :ref="index" 
             @click="choose(index, store.storeId)" 
@@ -70,6 +74,7 @@
               <td class="w-1">{{store.phoneNumber}}</td>
               <td class="w-1">{{fomatStatusStore(store.status)}}</td>
             </tr>
+            
           </table>
           
         </div>
@@ -96,14 +101,30 @@
 export default {
   name: 'TableContent',
   props: {
+
   },
   created(){
-    this.$store.dispatch('getStores')
+    this.$store.dispatch('getStores');
+  },
+  watch:{
+    action(){
+      // Lỗi nếu xóa lỗi
+      console.log(this.$store.getters.getMsg);
+      this.rowChoose = null;
+      this.$emit("click", false);
+      this.$store.dispatch('getStores');
+    }
   },
   computed:{
     dataList(){
-      console.log(this.$store.getters.getStores)
-        return this.$store.getters.getStores
+      console.log(this.$store.getters.getStores);
+        return this.$store.getters.getStores;
+    },
+    action(){
+      return this.$store.getters.getAction;
+    },
+    isLoaded(){
+      return this.$store.getters.getLoadData;
     }
   },
   data(){
@@ -122,7 +143,7 @@ export default {
       this.rowChoose = index;
       this.$store.dispatch('getStoreById', storeId);
       console.log(this.$store.getters.getStoreById);
-      this.$emit("click")
+      this.$emit("click", true)
     },
     updateStore(){
       this.$emit("openStoreDialog", "post");
@@ -131,9 +152,28 @@ export default {
 }
 </script>
 <style scoped>
+@import '../../css/animationLoader.css';
+
+/* css cho animation loading */
+.loading{
+  width: calc(100% - 182px);
+  height: calc(100vh - 218px);
+  position: fixed;
+  top: 160px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  text-align: center;
+}
+.loading .text{
+  position: fixed;
+  left: calc(50% + 20px);
+  top: calc(50% + 90px);
+}
+/* css cho hàng được chọn */
 .rowChoose{
   background-color: #e2e4f1 !important;
 }
+/* css cho trang */
 .table-content{
     width: calc(100% - 16px);
     height: calc(100vh - 104px);

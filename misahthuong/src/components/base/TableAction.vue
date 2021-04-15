@@ -8,15 +8,15 @@
           <span class="img double"></span>
           <span class="lable">Nhân bản</span>
         </button>
-        <button class="group"  @click="openDialog('post')" v-bind:class="{ notouch: !isChoose }" :title="titleButtonEdit">
+        <button class="group"  @click="openDialog('post')" v-bind:class="{ notouch: !isChoosed }" :title="titleButtonEdit">
           <span class="img edit"></span>
           <span class="lable">Sửa</span>
         </button>
-        <button class="group" @click="openConfirmDialog()" v-bind:class="{ notouch: !isChoose }" :title="titleButtonDelete">
+        <button class="group" @click="openConfirmDialog()" v-bind:class="{ notouch: !isChoosed }" :title="titleButtonDelete">
           <span class="img delete"></span>
           <span class="lable">Xóa</span>
         </button>
-        <button class="group" title="Nạp lại dữ liệu">
+        <button class="group" title="Nạp lại dữ liệu" @click="reload">
           <span class="img reload"></span>
           <span class="lable">Nạp</span>
         </button>
@@ -63,6 +63,10 @@ export default {
     },
     openConfirmDialog(){
       if(this.isChoosed) this.$emit("openConfirmDialog");
+      console.log("openConfirmDialog")
+    },
+    reload(){
+      this.$store.dispatch('getStores');
     }
   }
 }

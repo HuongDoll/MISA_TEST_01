@@ -9,5 +9,6 @@ namespace MISA.Core.Interfaces
 {
     public interface IProvinceRepository : IBaseRepository<Province>
     {
+        IEnumerable<Province> GetProvinceWithCountry(Guid entityId);
     }
 }

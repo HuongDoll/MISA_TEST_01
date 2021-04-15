@@ -10,6 +10,15 @@ namespace MISA.Core.Services
 {
     public class DistrictService : BaseService<District>, IDistrictService
     {
-        public DistrictService(IDistrictRepository districtRepository) : base(districtRepository) { }
+        IDistrictRepository _districtRepository;
+        public DistrictService(IDistrictRepository districtRepository) : base(districtRepository)
+        {
+            _districtRepository = districtRepository;
+        }
+        public IEnumerable<District> GetDistrictWithProvince(Guid entityId)
+        {
+            var entities = _districtRepository.GetDistrictWithProvince(entityId);
+            return entities;
+        }
     }
 }

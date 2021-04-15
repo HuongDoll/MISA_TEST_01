@@ -9,5 +9,6 @@ namespace MISA.Core.Interfaces
 {
     public interface IWardService : IBaseService<Ward>
     {
+        IEnumerable<Ward> GetWardWithDistrict(Guid entityId);
     }
 }
