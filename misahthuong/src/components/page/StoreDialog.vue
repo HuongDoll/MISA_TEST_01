@@ -308,6 +308,7 @@ export default {
             this.titleName = "Nhân bản cửa hàng";
             this.validates.storeCode = false;
             this.store.storeId = "00000000-0000-0000-0000-000000000000";
+            this.$store.dispatch("getStoreByCode", this.store.storeCode);
           }
         }
       }
