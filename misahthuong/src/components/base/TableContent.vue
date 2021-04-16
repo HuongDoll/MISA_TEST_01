@@ -82,18 +82,16 @@
           <button class="pre-pre"></button>
           <button class="pre"></button>
           <span>Trang</span>
-          <input type="text" v-model="pageNumber">
-          <span>trên 1</span>
+          <input type="number" v-model="page.pageNumber">
+          <span>trên {{page.numberPage}}</span>
           <button class="ne"></button>
           <button class="ne-ne"></button>
           <button class="reload"></button>
-          <select name="" id="">
-            <option value="15">15</option>
-            <option value="25">25</option>
-            <option value="50" selected>50</option>
-            <option value="100">100</option>
+          <select name="" id="" v-model="page.numberStoreSelect">
+            <option v-for="(number, index) in selectNumberStore" :key="index" :value=number >{{number}}</option>
+            
           </select>
-          <span class="text-right">Hiển thị 1-6 trên 6 kết quả</span>
+          <span class="text-right">Hiển thị {{page.indexStart}}-{{page.indexEnd}} trên {{page.countStore}} kết quả</span>
         </div>
     </div>
 </template>
@@ -144,7 +142,6 @@ export default {
   },
   data(){
     return{
-      pageNumber : 1,
       rowChoose : null,
       filter: {
         storeCode : "",
@@ -152,7 +149,16 @@ export default {
         address : "", 
         phoneNumber : "", 
         status : ""
-      }
+      },
+      page: {
+        countStore: 0,
+        pageNumber : 1,
+        numberPage : 1,
+        indexStart : 0,
+        indexEnd : 0,
+        numberStoreSelect : 50,
+      },
+      selectNumberStore : [15, 25, 50, 100]
     }
   },
   methods:{
@@ -175,7 +181,14 @@ export default {
 </script>
 <style scoped>
 @import '../../css/animationLoader.css';
-
+/* bỏ mũi tên trong input type=number */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
 /* css cho animation loading */
 .loading{
   width: calc(100% - 182px);

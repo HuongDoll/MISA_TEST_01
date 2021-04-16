@@ -27,6 +27,8 @@ body{
 .app{
   width: 100%;
   height: 100vh;
+  min-width: 750px;
+  min-height: 360px;
   display: flex;
   font-family: 'GoogleSans-Regular';
 }
