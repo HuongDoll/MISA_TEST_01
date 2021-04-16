@@ -50,7 +50,7 @@ namespace MISA.Core.Services
             return res;
         }
 
-        public IEnumerable<Store> GetStoreFilter(string storeCode, string storeName, string address, string phoneNumber, int status)
+        public IEnumerable<Store> GetStoreFilter(string storeCode, string storeName, string address, string phoneNumber, int? status)
         {
             var res = _storeRepository.GetStoreFilter(storeCode, storeName, address, phoneNumber, status);
             return res;

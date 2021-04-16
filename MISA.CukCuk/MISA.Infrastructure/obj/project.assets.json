@@ -537,19 +537,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\hthuong\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "H:\\MISA.Web2021_03\\MISA_TEST_01\\MISA_TEST_01\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\hthuong\\source\\MISA_TEST\\MISA_TEST_01\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj",
       "projectName": "MISA.Infrastructure",
-      "projectPath": "H:\\MISA.Web2021_03\\MISA_TEST_01\\MISA_TEST_01\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "H:\\MISA.Web2021_03\\MISA_TEST_01\\MISA_TEST_01\\MISA.CukCuk\\MISA.Infrastructure\\obj\\",
+      "projectPath": "C:\\Users\\hthuong\\source\\MISA_TEST\\MISA_TEST_01\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\hthuong\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\hthuong\\source\\MISA_TEST\\MISA_TEST_01\\MISA.CukCuk\\MISA.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\hthuong\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -563,8 +563,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "H:\\MISA.Web2021_03\\MISA_TEST_01\\MISA_TEST_01\\MISA.CukCuk\\MISA.Core\\MISA.Core.csproj": {
-              "projectPath": "H:\\MISA.Web2021_03\\MISA_TEST_01\\MISA_TEST_01\\MISA.CukCuk\\MISA.Core\\MISA.Core.csproj"
+            "C:\\Users\\hthuong\\source\\MISA_TEST\\MISA_TEST_01\\MISA.CukCuk\\MISA.Core\\MISA.Core.csproj": {
+              "projectPath": "C:\\Users\\hthuong\\source\\MISA_TEST\\MISA_TEST_01\\MISA.CukCuk\\MISA.Core\\MISA.Core.csproj"
             }
           }
         }

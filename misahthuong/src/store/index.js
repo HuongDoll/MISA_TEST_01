@@ -11,6 +11,7 @@ const store = new Vuex.Store({
         action: 0,
         msg: "Thành công!",
         loadData: false,
+        dataCheckCodeStore : null, // trả về store bị trùng code
         // address
         countries: [],
         districts: [],
@@ -18,6 +19,9 @@ const store = new Vuex.Store({
         wards: [],
     },
     getters: {
+        getDataCheckCodeStore(state) {
+            return state.dataCheckCodeStore;
+        },
         getStores(state) {
             return state.stores;
         },
@@ -51,6 +55,9 @@ const store = new Vuex.Store({
         },
     },
     mutations: {
+        setDataCheckCodeStore(state, payload) {
+            state.dataCheckCodeStore = payload
+        },
         setCountries(state, payload) {
             state.countries = payload
         },
@@ -94,6 +101,14 @@ const store = new Vuex.Store({
         }
     },
     actions: {
+        getStoreByCode(context, storeCode) {
+            console.log("get data by storecode")
+            axios.get('https://localhost:44379/api/Store/byCode/' + storeCode)
+                .then(response => {
+                    console.log(response.data.data)
+                    context.commit("setDataCheckCodeStore", response.data.data)
+                })
+        },
         getStoreById(context, storeId) {
             context.commit("getStoreById", storeId)
         },
@@ -147,18 +162,9 @@ const store = new Vuex.Store({
         },
         getStoreByFilter(context, filter) {
             context.commit("loading");
-            if (filter.storeCode == "") var storeCode = "%20";
-            else storeCode = filter.storeCode;
-            if (filter.storeName == "") var storeName = "%20";
-            else storeName = filter.storeName;
-            if (filter.address == "") var address = "%20";
-            else address = filter.address;
-            if (filter.phoneNumber == "") var phoneNumber = "%20";
-            else phoneNumber = filter.phoneNumber;
-            // if (filter.status == "") var status = 1;
-            var status = filter.status;
-            console.log('https://localhost:44379/api/Store/' + storeCode + '/' + storeName + '/' + address + '/' + phoneNumber + '/' + status)
-            axios.get('https://localhost:44379/api/Store/' + storeCode + '/' + storeName + '/' + address + '/' + phoneNumber + '/' + status)
+            var url = `https://localhost:44379/api/Store/filter?storeCode=${filter.storeCode}&storeName=${filter.storeName}&address=${filter.address}&phoneNumber=${filter.phoneNumber}&status=${filter.status}`;
+            console.log(url)
+            axios.get(url)
                 .then(response => {
                     console.log(response)
                     context.commit("loaded");

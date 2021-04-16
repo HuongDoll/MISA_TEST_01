@@ -24,7 +24,7 @@ namespace MISA.Eshop.Controllers
         /// <param name="entityId"> id của cửa hàng cần xóa</param>
         /// <returns>số bản ghi bị ảnh hưởng</returns>
         [HttpDelete("{entityId}")]
-        
+
         public IActionResult Delete(Guid entityId)
         {
             var res = new ResponeResult();
@@ -116,21 +116,23 @@ namespace MISA.Eshop.Controllers
             // lấy dữ liệu từ database
             var entitie = _storeService.GetIndexOffset(position, offset);
             // Kiểm tra dữ liệu trả về
-            
+
             res.OnSuccess(res);
             res.DevMsg = "Lấy thông tin thành công!";
             res.UserMsg = "Lấy thông tin cửa hàng thành công!";
             res.Data = entitie;
             return Ok(res);
-            
-        }
 
-        [HttpGet("{storeCode}/{storeName}/{address}/{phoneNumber}/{status}")]
-        public IActionResult GetStoreFilter(string storeCode, string storeName, string address, string phoneNumber, int status)
+        }
+        // "{storeCode}/{storeName}/{address}/{phoneNumber}/{status}"
+        [HttpGet("filter")]
+        public IActionResult GetStoreFilter([FromQuery] PagingParameter parameter)
         {
+            // string storeCode, string storeName, string address, string phoneNumber, int? status
             var res = new ResponeResult();
             // lấy dữ liệu từ database
-            var entitie = _storeService.GetStoreFilter(storeCode, storeName, address, phoneNumber, status);
+            var entitie = _storeService.GetStoreFilter(
+                parameter.storeCode, parameter.storeName, parameter.address, parameter.phoneNumber, parameter.status);
             // Kiểm tra dữ liệu trả về
 
             res.OnSuccess(res);
@@ -154,7 +156,33 @@ namespace MISA.Eshop.Controllers
             res.UserMsg = "Lấy thông tin cửa hàng thành công!";
             res.Data = entitie;
             return Ok(res);
-
         }
+
+        [HttpGet("byCode/{storeCode}")]
+        public IActionResult GetStoreByCode(string storeCode)
+        {
+            var res = new ResponeResult();
+            // lấy dữ liệu từ database
+            var entitie = _storeService.GetByStoreCode(storeCode);
+
+            res.OnSuccess(res);
+            res.DevMsg = "Lấy thông tin thành công!";
+            res.UserMsg = "Lấy thông tin cửa hàng thành công!";
+            res.Data = entitie;
+            return Ok(res);
+        }
+    }
+
+    public class PagingParameter
+    {
+        public string storeCode { get; set; }
+
+        public string storeName { get; set; }
+
+        public string address { get; set; }
+
+        public string phoneNumber { get; set; }
+
+        public int? status { get; set; }
     }
 }

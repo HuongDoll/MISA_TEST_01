@@ -32,4 +32,7 @@ body{
   display: flex;
   font-family: 'GoogleSans-Regular';
 }
+button{
+  cursor: pointer;
+}
 </style>

@@ -3870,19 +3870,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\hthuong\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "H:\\MISA.Web2021_03\\MISA_TEST_01\\MISA_TEST_01\\MISA.CukCuk\\MISA.CukCuk\\MISA.Eshop.csproj",
+      "projectUniqueName": "C:\\Users\\hthuong\\source\\MISA_TEST\\MISA_TEST_01\\MISA.CukCuk\\MISA.CukCuk\\MISA.Eshop.csproj",
       "projectName": "MISA.Eshop",
-      "projectPath": "H:\\MISA.Web2021_03\\MISA_TEST_01\\MISA_TEST_01\\MISA.CukCuk\\MISA.CukCuk\\MISA.Eshop.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "H:\\MISA.Web2021_03\\MISA_TEST_01\\MISA_TEST_01\\MISA.CukCuk\\MISA.CukCuk\\obj\\",
+      "projectPath": "C:\\Users\\hthuong\\source\\MISA_TEST\\MISA_TEST_01\\MISA.CukCuk\\MISA.CukCuk\\MISA.Eshop.csproj",
+      "packagesPath": "C:\\Users\\hthuong\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\hthuong\\source\\MISA_TEST\\MISA_TEST_01\\MISA.CukCuk\\MISA.CukCuk\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\hthuong\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3896,11 +3896,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "H:\\MISA.Web2021_03\\MISA_TEST_01\\MISA_TEST_01\\MISA.CukCuk\\MISA.Core\\MISA.Core.csproj": {
-              "projectPath": "H:\\MISA.Web2021_03\\MISA_TEST_01\\MISA_TEST_01\\MISA.CukCuk\\MISA.Core\\MISA.Core.csproj"
+            "C:\\Users\\hthuong\\source\\MISA_TEST\\MISA_TEST_01\\MISA.CukCuk\\MISA.Core\\MISA.Core.csproj": {
+              "projectPath": "C:\\Users\\hthuong\\source\\MISA_TEST\\MISA_TEST_01\\MISA.CukCuk\\MISA.Core\\MISA.Core.csproj"
             },
-            "H:\\MISA.Web2021_03\\MISA_TEST_01\\MISA_TEST_01\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj": {
-              "projectPath": "H:\\MISA.Web2021_03\\MISA_TEST_01\\MISA_TEST_01\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj"
+            "C:\\Users\\hthuong\\source\\MISA_TEST\\MISA_TEST_01\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\hthuong\\source\\MISA_TEST\\MISA_TEST_01\\MISA.CukCuk\\MISA.Infrastructure\\MISA.Infrastructure.csproj"
             }
           }
         }

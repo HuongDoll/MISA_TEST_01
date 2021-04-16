@@ -4,7 +4,7 @@
           <span class="img add"></span>
           <span class="lable">Thêm mới</span>
         </button>
-        <button  class="group notouch" title="Tính năng này đang được phát triển">
+        <button  class="group" @click="openDialog('copy')" v-bind:class="{ notouch: !isChoosed }" :title="titleButtonCopy">
           <span class="img double"></span>
           <span class="lable">Nhân bản</span>
         </button>
@@ -41,10 +41,12 @@ export default {
       if(!this.isChoosed) {
         this.titleButtonEdit = "Chọn một cửa hàng để chỉnh sửa";
         this.titleButtonDelete = "Chọn một cửa hàng để xóa";
+        this.titleButtonCopy = "Chọn một cửa hàng để nhân bản";
         }
       else {
-        this.titleButtonEdit = "Chỉnh sửa thông tin cửa hàng";
-        this.titleButtonDelete = "Xóa cửa hàng";
+        this.titleButtonEdit = "Chỉnh sửa";
+        this.titleButtonDelete = "Xóa";
+        this.titleButtonCopy = "Nhân bản";
         }
     }
   },
@@ -52,6 +54,7 @@ export default {
     return{
       titleButtonEdit : "Chọn một cửa hàng để chỉnh sửa",
       titleButtonDelete : "Chọn một cửa hàng để xóa",
+      titleButtonCopy : "Chọn một cửa hàng để nhân bản"
     }
   },
   methods:{

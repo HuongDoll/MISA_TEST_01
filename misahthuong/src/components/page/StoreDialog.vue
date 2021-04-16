@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="confirmDialog" ></div>
+    <div class="confirmDialog"></div>
     <div class="content">
       <div class="title">
         <span>{{ titleName }}</span>
@@ -26,7 +26,7 @@
           />
           <div v-show="!validates.storeCode" class="div_error">
             <img src="../../assets/icon/exclamation.png" />
-            <span class="title_error">Trường này không được để trống</span>
+            <span class="title_error">{{ msgStoreCode }}</span>
           </div>
         </div>
         <div class="groupdb w-full">
@@ -102,7 +102,7 @@
         <div class="groupdb w-full">
           <div class="group group-l w-haf">
             <span class="lable">Quốc gia</span>
-            <select v-model="store.countryId" name="" id="" tabindex="7" >
+            <select v-model="store.countryId" name="" id="" tabindex="7">
               <option value="null" selected disabled>Chọn quốc gia</option>
               <option
                 v-for="(country, index) in countries"
@@ -222,6 +222,9 @@ export default {
       console.log(this.$store.getters.getWards);
       return this.$store.getters.getWards;
     },
+    storeByCode() {
+      return this.$store.getters.getDataCheckCodeStore;
+    },
   },
   data() {
     return {
@@ -250,16 +253,35 @@ export default {
         address: true,
         phoneNumber: true,
       },
+      msgStoreCode: "Trường này không được để trống",
     };
   },
   watch: {
+    storeByCode() {
+      console.log(this.storeByCode);
+      if (this.storeByCode != null) {
+        if (this.msg == "post") {
+          if (this.storeByCode.storeId != this.store.storeId) {
+            console.log("this.storeByCode.storeId: " + this.storeByCode.storeId)
+            this.validates.storeCode = false;
+            this.msgStoreCode = "Mã cửa hàng bị trùng";
+          }
+        } else {
+          this.validates.storeCode = false;
+          this.msgStoreCode = "Mã cửa hàng bị trùng";
+        }
+      } else {
+        this.validates.storeCode = true;
+        this.msgStoreCode = "Trường này không được để trống";
+      }
+    },
     isShowDialog() {
       console.log(this.$store.getters.getStoreById.length);
       if (this.isShowDialog == true) {
-        if (this.msg == "post") {
-          this.titleName = "Sửa cửa hàng";
+        if (this.msg == "put") {
+          this.resetStore();
+        } else {
           var StoreById = this.$store.getters.getStoreById[0];
-          this.store.storeId = StoreById.storeId;
           this.store.storeCode = StoreById.storeCode;
           this.store.storeName = StoreById.storeName;
           this.store.address = StoreById.address;
@@ -275,54 +297,65 @@ export default {
           this.store.modifiedDate = StoreById.modifiedDate;
           this.store.modifiedBy = StoreById.modifiedBy;
           this.$refs.storeCode.focus();
-          this.validates.storeCode = true;
           this.validates.storeName = true;
           this.validates.address = true;
           this.validates.phoneNumber = true;
-        } else {
-          this.titleName = "Thêm mới cửa hàng";
-          this.store.storeId = "00000000-0000-0000-0000-000000000000";
-          this.store.storeCode = "";
-          this.store.storeName = "";
-          this.store.address = "";
-          this.store.phoneNumber = "";
-          this.store.storeTaxCode = "";
-          this.store.countryId = null;
-          this.store.provinceId = null;
-          this.store.districtId = null;
-          this.store.wardId = null;
-          this.store.street = "";
-          this.store.createdDate = null;
-          this.store.createdBy = "";
-          this.store.modifiedDate = null;
-          this.store.modifiedBy = "";
-          this.$refs.storeCode.focus();
-          this.validates.storeCode = true;
-          this.validates.storeName = true;
-          this.validates.address = true;
-          this.validates.phoneNumber = true;
+          if (this.msg == "post"){
+            this.titleName = "Sửa cửa hàng";
+            this.validates.storeCode = true;
+            this.store.storeId = StoreById.storeId;
+          }else{
+            this.titleName = "Nhân bản cửa hàng";
+            this.validates.storeCode = false;
+            this.store.storeId = "00000000-0000-0000-0000-000000000000";
+          }
         }
       }
     },
-    'store.countryId'(){
-        console.log(this.store.countryId)
-        if(this.store.countryId != null) this.$store.dispatch("getProvinces", this.store.countryId);
-        this.store.provinceId = null;
-        this.store.districtId = null;
-        this.store.wardId = null;
+    "store.countryId"() {
+      console.log(this.store.countryId);
+      if (this.store.countryId != null)
+        this.$store.dispatch("getProvinces", this.store.countryId);
+      this.store.provinceId = null;
+      this.store.districtId = null;
+      this.store.wardId = null;
     },
-    'store.provinceId'(){
-        if(this.store.provinceId != null) this.$store.dispatch("getDistricts", this.store.provinceId);
-        this.store.districtId = null;
-        this.store.wardId = null;
+    "store.provinceId"() {
+      if (this.store.provinceId != null)
+        this.$store.dispatch("getDistricts", this.store.provinceId);
+      this.store.districtId = null;
+      this.store.wardId = null;
     },
-    'store.districtId'(){
-        if(this.store.districtId != null) this.$store.dispatch("getWards", this.store.districtId);
-        this.store.wardId = null;
-    }
+    "store.districtId"() {
+      if (this.store.districtId != null)
+        this.$store.dispatch("getWards", this.store.districtId);
+      this.store.wardId = null;
+    },
   },
   methods: {
-    
+    resetStore(){
+      this.titleName = "Thêm mới cửa hàng";
+      this.store.storeId = "00000000-0000-0000-0000-000000000000";
+      this.store.storeCode = "";
+      this.store.storeName = "";
+      this.store.address = "";
+      this.store.phoneNumber = "";
+      this.store.storeTaxCode = "";
+      this.store.countryId = null;
+      this.store.provinceId = null;
+      this.store.districtId = null;
+      this.store.wardId = null;
+      this.store.street = "";
+      this.store.createdDate = null;
+      this.store.createdBy = "";
+      this.store.modifiedDate = null;
+      this.store.modifiedBy = "";
+      this.$refs.storeCode.focus();
+      this.validates.storeCode = true;
+      this.validates.storeName = true;
+      this.validates.address = true;
+      this.validates.phoneNumber = true;
+    },
     closeDialog() {
       this.$emit("closeDialog");
     },
@@ -336,7 +369,10 @@ export default {
       var phonenumber = /^\d{10}$/;
       if (value == "storeCode") {
         if (this.store.storeCode == "") this.validates.storeCode = false;
-        else this.validates.storeCode = true;
+        else {
+          this.$store.dispatch("getStoreByCode", this.store.storeCode);
+          this.validates.storeCode = true;
+        }
       }
       if (value == "storeName") {
         if (this.store.storeName == "") this.validates.storeName = false;
@@ -358,29 +394,36 @@ export default {
     save(text) {
       console.log(text);
       if (this.msg == "post") {
-        if (this.validate()) {
+        if (this.validate() && this.validates.storeCode == true) {
           console.log(this.msg);
           this.$store.dispatch("updateStore", this.store);
           if (text == "save") this.closeDialog();
+          else this.resetStore();
           this.$emit("notify");
         }
       } else {
         console.log(this.msg);
-        if (this.validate()) {
+        if (this.validate() && this.validates.storeCode == true) {
+          alert("fff")
           console.log(this.msg);
           this.$store.dispatch("insertStore", this.store);
           if (text == "save") this.closeDialog();
-          this.$emit("notify");
+          // else this.resetStore();
+          // this.$emit("notify");
         }
       }
     },
     validate() {
       var phonenumber = /^\d{10}$/;
       var res = true;
+
       if (this.store.storeCode == "") {
-        this.validates.storeCode = false;
+        this.validates.storeCode == false;
         res = false;
-      } else this.validates.storeCode = true;
+      } else {
+        this.$store.dispatch("getStoreByCode", this.store.storeCode);
+        res = true;
+      }
 
       if (this.store.storeName == "") {
         this.validates.storeName = false;
@@ -566,8 +609,8 @@ input:focus {
 /* css footer */
 .footer {
   width: 100%;
-  height: 68px;
-  padding: 16px;
+  height: 52px;
+  padding: 8px 16px;
   box-sizing: border-box;
   display: flex;
 }

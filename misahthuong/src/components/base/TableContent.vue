@@ -79,19 +79,19 @@
           
         </div>
         <div class="page-bar">
-          <button class="pre-pre"></button>
-          <button class="pre"></button>
+          <button class="pre-pre" @click="page.pageNumber -=2"></button>
+          <button class="pre" @click="page.pageNumber --"></button>
           <span>Trang</span>
           <input type="number" v-model="page.pageNumber">
-          <span>trên {{page.numberPage}}</span>
-          <button class="ne"></button>
-          <button class="ne-ne"></button>
+          <span>trên {{numberPage}}</span>
+          <button class="ne" @click="page.pageNumber ++"></button>
+          <button class="ne-ne" @click="page.pageNumber +=2"></button>
           <button class="reload"></button>
           <select name="" id="" v-model="page.numberStoreSelect">
             <option v-for="(number, index) in selectNumberStore" :key="index" :value=number >{{number}}</option>
             
           </select>
-          <span class="text-right">Hiển thị {{page.indexStart}}-{{page.indexEnd}} trên {{page.countStore}} kết quả</span>
+          <span class="text-right">Hiển thị {{indexStart}}-{{indexEnd}} trên {{countStore}} kết quả</span>
         </div>
     </div>
 </template>
@@ -126,18 +126,39 @@ export default {
     },
     'filter.status'() {
       this.$store.dispatch('getStoreByFilter', this.filter);
+    },
+    'page.pageNumber'(){
+      if(this.page.pageNumber < 1) this.page.pageNumber = 1;
+      if(this.page.pageNumber > this.numberPage) this.page.pageNumber = this.numberPage;
     }
   },
   computed:{
     dataList(){
-      console.log(this.$store.getters.getStores);
-        return this.$store.getters.getStores;
+        return this.$store.getters.getStores.slice(this.indexStart - 1, this.indexEnd);
     },
     action(){
       return this.$store.getters.getAction;
     },
     isLoaded(){
       return this.$store.getters.getLoadData;
+    },
+    countStore(){
+      return this.$store.getters.getStores.length;
+    },
+    numberPage(){
+      var number = (this.countStore - this.countStore%this.page.numberStoreSelect)/this.page.numberStoreSelect;
+      if(this.countStore%this.page.numberStoreSelect >0) number ++;
+      return number;
+    },
+    indexStart(){
+      if(this.countStore == 0) return 0;
+      var number = (this.page.pageNumber - 1) * this.page.numberStoreSelect + 1;
+      return number;
+    },
+    indexEnd(){
+      var number = this.page.pageNumber * this.page.numberStoreSelect;
+      if(number > this.countStore) number = this.countStore;
+      return number;
     }
   },
   data(){
@@ -151,11 +172,7 @@ export default {
         status : ""
       },
       page: {
-        countStore: 0,
         pageNumber : 1,
-        numberPage : 1,
-        indexStart : 0,
-        indexEnd : 0,
         numberStoreSelect : 50,
       },
       selectNumberStore : [15, 25, 50, 100]

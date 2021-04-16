@@ -50,7 +50,7 @@ namespace MISA.Infrastructure.Repository
             return entities;
         }
 
-        public IEnumerable<Store> GetStoreFilter(string storeCode, string storeNamee, string address, string phoneNumber, int status)
+        public IEnumerable<Store> GetStoreFilter(string storeCode, string storeNamee, string address, string phoneNumber, int? status)
         {
             string storeName = "Proc_GetStoreFilter";
             DynamicParameters dynamicParameters = new DynamicParameters();
