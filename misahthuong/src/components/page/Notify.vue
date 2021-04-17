@@ -1,7 +1,10 @@
 <template>
-    <div class="notify">
+  <div  class="notify">
+    <div class="notify-ct">
         {{msg}}
     </div>
+  </div>
+    
 </template>
 <script>
 
@@ -27,14 +30,21 @@ export default {
 <style scoped>
 .notify{
     min-width: 100px;
-    padding: 16px;
-    color: #ffffff;
+    padding: 0 0 0 16px;
     background-color: #434774;
-    opacity: 0.8;
     position: absolute;
-    top: 100px;
-    right: 24px;
-    font-size: 13px;
+    bottom: 80px;
+    right: 28px;
     border-radius: 5px;
+    box-shadow: 1px 1px 4px #000000;
+}
+.notify-ct{
+    width: calc(100% - 80px);
+    padding: 28px 40px;
+    color: #434774;
+    font-weight: bold;
+    border-top-right-radius: 5px;
+    background-color: #ffffff;
+    font-size: 16px;
 }
 </style>

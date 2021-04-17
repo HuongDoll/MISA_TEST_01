@@ -7,6 +7,10 @@ using MISA.Core.Interfaces;
 
 namespace MISA.Core.Services
 {
+    /// <summary>
+    /// lớp chung service
+    /// </summary>
+    /// <typeparam name="MISAEntity">thực thể</typeparam>
     public class BaseService<MISAEntity> : IBaseService<MISAEntity>
     {
         IBaseRepository<MISAEntity> _baseRepository;

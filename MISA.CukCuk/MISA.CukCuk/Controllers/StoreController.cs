@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MISA.Core.Entities;
 using MISA.Core.Interfaces;
+using MISA.Eshop.Parameter;
 using MISA.Eshop.Result;
 
 namespace MISA.Eshop.Controllers
@@ -83,7 +84,7 @@ namespace MISA.Eshop.Controllers
         /// </summary>
         /// <param name="entityId">id cửa hàng </param>
         /// <param name="store"> thông tin cửa hàng</param>
-        /// <returns></returns>
+        /// <returns>số bản ghi bị ảnh hưởng</returns>
         [HttpPut("{entityId}")]
         public IActionResult Put(Guid entityId, Store store)
         {
@@ -108,7 +109,13 @@ namespace MISA.Eshop.Controllers
                 return Ok(res);
             }
         }
-
+        /// <summary>
+        /// lấy dữ liệu dựa theo vị trí và số bản ghi
+        /// </summary>
+        /// <param name="position">vị trí</param>
+        /// <param name="offset">số bản ghi</param>
+        /// <returnsdanh sách bản ghi></returns>
+        
         [HttpGet("{position}/{offset}")]
         public IActionResult GetIndexOffset(int position, int offset)
         {
@@ -125,6 +132,11 @@ namespace MISA.Eshop.Controllers
 
         }
         // "{storeCode}/{storeName}/{address}/{phoneNumber}/{status}"
+        /// <summary>
+        /// lọc danh sách khách hàng
+        /// </summary>
+        /// <param name="parameter">obiject lọc </param>
+        /// <returns>danh sách bản ghi thỏa mãn</returns>
         [HttpGet("filter")]
         public IActionResult GetStoreFilter([FromQuery] PagingParameter parameter)
         {
@@ -142,7 +154,10 @@ namespace MISA.Eshop.Controllers
             return Ok(res);
 
         }
-
+        /// <summary>
+        /// lấy số bản ghi
+        /// </summary>
+        /// <returns>số bản ghi</returns>
         [HttpGet("count")]
         public IActionResult GetCount()
         {
@@ -157,7 +172,11 @@ namespace MISA.Eshop.Controllers
             res.Data = entitie;
             return Ok(res);
         }
-
+        /// <summary>
+        /// lấy cửa hàng dựa theo mã code
+        /// </summary>
+        /// <param name="storeCode"> mã code</param>
+        /// <returns>bản ghi thỏa mãn</returns>
         [HttpGet("byCode/{storeCode}")]
         public IActionResult GetStoreByCode(string storeCode)
         {
@@ -173,16 +192,5 @@ namespace MISA.Eshop.Controllers
         }
     }
 
-    public class PagingParameter
-    {
-        public string storeCode { get; set; }
-
-        public string storeName { get; set; }
-
-        public string address { get; set; }
-
-        public string phoneNumber { get; set; }
-
-        public int? status { get; set; }
-    }
+    
 }

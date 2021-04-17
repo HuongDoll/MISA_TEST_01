@@ -10,13 +10,16 @@ using MISA.Core.Interfaces;
 
 namespace MISA.Core.Services
 {
+    /// <summary>
+    /// lớp cửa hàng
+    /// </summary>
     public class StoreService : BaseService<Store>, IStoreService
     {
         IStoreRepository _storeRepository;
         public StoreService(IStoreRepository storeRepository) : base(storeRepository) {
             _storeRepository = storeRepository;
         }
-
+        
         public int Delete(Guid storeId)
         {
             var store = _storeRepository.GetById(storeId);

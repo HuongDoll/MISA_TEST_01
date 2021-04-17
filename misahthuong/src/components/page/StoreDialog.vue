@@ -300,15 +300,17 @@ export default {
           this.validates.storeName = true;
           this.validates.address = true;
           this.validates.phoneNumber = true;
+          this.$store.dispatch("getStoreByCode", this.store.storeCode);
           if (this.msg == "post"){
             this.titleName = "Sửa cửa hàng";
             this.validates.storeCode = true;
             this.store.storeId = StoreById.storeId;
+            
           }else{
             this.titleName = "Nhân bản cửa hàng";
             this.validates.storeCode = false;
             this.store.storeId = "00000000-0000-0000-0000-000000000000";
-            this.$store.dispatch("getStoreByCode", this.store.storeCode);
+            
           }
         }
       }
@@ -405,12 +407,11 @@ export default {
       } else {
         console.log(this.msg);
         if (this.validate() && this.validates.storeCode == true) {
-          alert("fff")
           console.log(this.msg);
           this.$store.dispatch("insertStore", this.store);
           if (text == "save") this.closeDialog();
-          // else this.resetStore();
-          // this.$emit("notify");
+          else this.resetStore();
+          this.$emit("notify");
         }
       }
     },

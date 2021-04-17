@@ -41,7 +41,7 @@ export default {
   computed:{
     storeName(){
         console.log(this.$store.getters.getStoreById)
-        if(this.$store.getters.getStoreById.length != 0) return this.$store.getters.getStoreById[0].storeName;
+        if(this.$store.getters.getStoreById.length != 0) return this.$store.getters.getStoreById[0].storeCode;
         else return null;
     }
   },
